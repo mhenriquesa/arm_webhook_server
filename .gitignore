@@ -1,1 +1,7 @@
 venv_webhook_server
+venv
+*.pyc
+staticfiles
+.env
+db.sqlite3
+getting-started/*
