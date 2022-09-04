@@ -24,10 +24,10 @@ def getCardsFromATrelloList(listId):
 
 
 
-def createCardOnTrelloList(card_name, listId, desc, idLabelsList):
+def createCardOnATrelloList(card_name, listId, desc, idLabelsList):
   url = mainTrelloEndpoint + "cards/"
   headers = {"Accept": "application/json"}
   query = {"name" : card_name, "idLabels" : idLabelsList, "idList" : listId, "key": trelloKey, "token" : trelloToken, "desc" : desc}
   
   response = requests.request("POST", url, headers=headers, params=query)
-  print(response)
+  print(response.text)
