@@ -6,3 +6,4 @@ staticfiles
 db.sqlite3
 getting-started/*
 teste.py
+__pycache__
