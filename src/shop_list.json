@@ -1,16 +1,16 @@
 {
-  "shop_list": [
+  "products": [
     {
       "product_id": 3999,
       "fornecedor": "",
-      "quantity": 3,
+      "quantity": 4,
       "img": "http://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662398190618.jpg",
       "name": "Produto teste"
     },
     {
       "product_id": 3885,
       "fornecedor": "",
-      "quantity": 5,
+      "quantity": 6,
       "img": "http://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662398178249.jpg",
       "name": "Produto teste"
     }

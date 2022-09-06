@@ -149,7 +149,7 @@ def productExistsInShopList(product_id):
         shop_list = json.load(f)
     f.close
 
-    for product in shop_list['shop_list']:
+    for product in shop_list['products']:
         product_in_shop_list_id = product['product_id']
         if product_in_shop_list_id == product_id:
             print('Foi encontrado um produto na lista')
@@ -171,7 +171,7 @@ def addProductToShopList(name, product_id,  imgUrl):
         json_shop_list = json.load(f)
     f.close()
 
-    json_shop_list['shop_list'].append(product_to_add)
+    json_shop_list['products'].append(product_to_add)
 
     with open('src/shop_list.json', 'w') as f:
         json.dump(json_shop_list, f)
@@ -181,7 +181,7 @@ def increaseProductQuantityOnShopList(productID, howMany):
         json_shop_list = json.load(f)
     f.close
     
-    for product in json_shop_list['shop_list']:
+    for product in json_shop_list['products']:
         if productID == product['product_id']:
             product['quantity'] += howMany
 
