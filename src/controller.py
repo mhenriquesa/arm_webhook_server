@@ -1,27 +1,34 @@
-from src.trello_api import createCardOnATrelloList
 from src.melhor_envio_api import addShippigTagToCart
+from src.trello_api import createCardOnATrelloList
 import json
+import re
 
 # listId = '6302dd26f5539012a2430c4e' #Pedidos a Fazer - CRM e Pedidos
 # labelsList = ['63037804ceeaa106a8d69189'] #Tag: Site
 
 def createNewOrderCard(order_informations):
-  order_id = str(order_informations['id'])
-  first_name = order_informations['billing']['first_name']
-  last_name = order_informations['billing']['last_name']
-  line_items = order_informations['line_items']
-  order_products = []
+    first_name = order_informations['billing']['first_name']
+    formattedPhone = order_informations['billing']['phone']
+    last_name = order_informations['billing']['last_name']
+    cep = order_informations['billing']['postcode']
+    line_items = order_informations['line_items']
+    order_id = str(order_informations['id'])
+    urlAttachs = []
 
-  for product in line_items:
-    prod_id = product['product_id']
-    order_products.append(prod_id)
+    
+    phoneOnlyNumbers = re.sub(r'[^0-9]', '', formattedPhone)
+    linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
+    
+    for product in line_items:
+        prod_img_url = product['image']['src']
+        urlAttachs.append(prod_img_url)
+        
+    card_desc = f'''Fone para contato: {formattedPhone}\nLink WhatsApp: \n{linkzap}'''            
+    card_name = f"#{order_id} - {first_name} {last_name}"
+    listId = '631397afbd8be200c4e5b6e9'
+    labelsList = []
 
-  card_name = f"# {order_id} - {first_name} {last_name} / {order_products} "
-  listId = '631397afbd8be200c4e5b6e9' #Pedidos a Fazer - Teste em automação
-  card_desc = ''
-  labelsList = []
-
-  createCardOnATrelloList(card_name, listId, card_desc, labelsList)
+    createCardOnATrelloList(card_name, listId, card_desc, labelsList, urlAttachs)
 
 def createNewOrderShippingTagOnCart(order_informations):
     ship_info = {
@@ -130,5 +137,9 @@ def createNewOrderShippingTagOnCart(order_informations):
 
     addShippigTagToCart(ship_info_updated)
 
+def insertOrderProductsOnShopList():
+    pass
 
+def insertOrderOnWhatsOrdersList():
+    pass
       

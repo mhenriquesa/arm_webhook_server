@@ -1,8 +1,8 @@
 #cria as etiquetas de envio no melhor envio. (coloca no carrinho)
-import requests
 import os
-main_url = "https://melhorenvio.com.br/api/v2/me/"
+import requests
 token = os.environ.get('ARM_MENVIO')
+main_url = "https://melhorenvio.com.br/api/v2/me/"
 
 headers = {
     'Accept': 'application/json',

@@ -7,3 +7,6 @@ db.sqlite3
 getting-started/*
 teste.py
 __pycache__
+credentials.json
+token.json
+run_dev.py
