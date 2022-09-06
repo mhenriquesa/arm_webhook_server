@@ -137,9 +137,96 @@ def createNewOrderShippingTagOnCart(order_informations):
 
     addShippigTagToCart(ship_info_updated)
 
-def insertOrderProductsOnShopList():
-    pass
+def productExistsInStock(product_id):
+    with open('src/stock.json') as f:
+        stock = json.load(f)
+    f.close
+
+    return True if str(product_id) in stock else False
+
+def productExistsInShopList(product_id):
+    with open('src/shop_list.json') as f:
+        shop_list = json.load(f)
+    f.close
+
+    for product in shop_list['shop_list']:
+        product_in_shop_list_id = product['product_id']
+        if product_in_shop_list_id == product_id:
+            print('Foi encontrado um produto na lista')
+            return True
+    
+    print('NÃO Foi encontrado um produto na lista de Compra')
+    return False
+    
+def addProductToShopList(name, product_id,  imgUrl):
+    product_to_add = {
+        "product_id" : product_id,
+        "fornecedor" : '',
+        "quantity" : 1,
+        "img" : imgUrl['src'],
+        "name" : name
+    }
+
+    with open('src/shop_list.json') as f:
+        json_shop_list = json.load(f)
+    f.close()
+
+    json_shop_list['shop_list'].append(product_to_add)
+
+    with open('src/shop_list.json', 'w') as f:
+        json.dump(json_shop_list, f)
+
+def increaseProductQuantityOnShopList(productID, howMany):
+    with open('src/shop_list.json') as f:
+        json_shop_list = json.load(f)
+    f.close
+    
+    for product in json_shop_list['shop_list']:
+        if productID == product['product_id']:
+            product['quantity'] += howMany
+
+            with open('src/shop_list.json', 'w') as f:
+               json.dump(json_shop_list, f)
+            f.close
+
+            return
+    print('Não existe esse produto na lista. Algo errado')
+
+
+def insertOrderProductsOnShopList(order_informations):
+    order_products = order_informations['line_items']
+
+    for product in order_products:
+        new_order_product_id = product['product_id'] #int
+
+        if productExistsInStock(new_order_product_id):
+            print(f'''{product['name']} já tem em estoque.''')
+            print('Não adicionado à lista de compra.')
+            print('Checkando próximo produto...')
+            continue
+
+        print('Produto não existe em estoque...')
+
+        if productExistsInShopList(new_order_product_id):
+            print(f'''{product['name']} já está na lista de compra''')
+
+            increaseProductQuantityOnShopList(new_order_product_id, product['quantity'])
+            print('Foi aumentado a quatidade de um produto da lista')
+            continue
+        
+        print('Produto não está na lista de compras')
+        addProductToShopList(product['name'], product['product_id'],  product['image'])
+
+        print('Foi adicionado um produto à lista de compras')
+
+
+
+            
+
+
+
+
+        
 
 def insertOrderOnWhatsOrdersList():
     pass
-      
