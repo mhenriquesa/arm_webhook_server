@@ -1,5 +1,6 @@
 from src.controller import createNewOrderShippingTagOnCart
 from src.controller import insertOrderProductsOnShopList
+from src.controller import posVendaFormRoutine
 from src.controller import addressFormRoutine
 from src.controller import createNewOrderCard
 from flask import request, Response, Blueprint
@@ -54,4 +55,14 @@ def recevied_address_form():
     if data:
         return Response(status=200)
 
+    return Response(status=500)
+
+@main.route('/pos-venda', methods=['POST'])
+def pos_venda():
+    data = request.form.to_dict()
+    print(data)
+    posVendaFormRoutine(data)
+
+    if data:
+        return Response(status=200)
     return Response(status=500)

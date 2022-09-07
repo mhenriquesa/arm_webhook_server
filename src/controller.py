@@ -25,7 +25,7 @@ def createNewOrderCard(order_informations):
         
     card_desc = f'''Fone para contato: {formattedPhone}\nLink WhatsApp: \n{linkzap}'''            
     card_name = f"#{order_id} - {first_name} {last_name}"
-    listId = '631397afbd8be200c4e5b6e9'
+    listId = '63191b83a8e4af048326a8b2'
     labelsList = []
 
     createCardOnATrelloList(card_name, listId, card_desc, labelsList, urlAttachs)
@@ -246,3 +246,17 @@ def addressFormRoutine(data):
 
 def insertOrderOnWhatsOrdersList():
     pass
+
+def posVendaFormRoutine(data):
+    trello_list = '631916f1d6c70804cdf94931'
+    motivo = data['Qual o motivo do seu contato?']
+    buyer = data['Nome do Comprador']
+    pedido = data['Número do Pedido ARM']
+    date = data['Date']
+    zap = data['WhatsApp para Contato']
+    acontecido = data['O que aconteceu? Como posso ajudar?']
+    imgs = data['Clique aqui para enviar algumas fotos para ajudar na avaliação']
+
+    card_desc = ''
+
+    createCardOnATrelloList(buyer, trello_list, card_desc, [], imgs)
