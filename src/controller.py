@@ -192,7 +192,6 @@ def increaseProductQuantityOnShopList(productID, howMany):
             return
     print('Não existe esse produto na lista. Algo errado')
 
-
 def insertOrderProductsOnShopList(order_informations):
     order_products = order_informations['line_items']
 
@@ -219,14 +218,31 @@ def insertOrderProductsOnShopList(order_informations):
 
         print('Foi adicionado um produto à lista de compras')
 
+def addressFormRoutine(data):
+    #dados recebidos do formlário de endereço do site ARM
+    trelloList = "6315059660711c0109c21c09" # Leads que preencheram Formulário
 
+    form_name = data['form[name]']
+    name = data['fields[name][value]']
+    address_1 = data['fields[address_1][value]']
+    number = data['fields[number][value]']
+    complement = data['fields[address_2][value]']
+    neibor = data['fields[neibor][value]']
+    observacao = data['fields[observ][raw_value]'],
+    city = data['fields[city][value]']
+    state = data['fields[state][value]']
+    cep = data['fields[cep][value]']
+    cpf = data['fields[cpf][value]']
+    zap = data['fields[zap][value]']
 
-            
+    phoneOnlyNumbers = re.sub(r'[^0-9]', '', zap)
+    linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
 
+    card_desc = { 
+        f'Nome : {name}\nRua/Avenida : {address_1}\nNúmero: {number}\nComplemento: {complement}\nBairro: {neibor}\nObs: {observacao}\nCidade: {city}\nEstado: {state}\nCep: {cep}\n\n------------------------\n\nCPF: {cpf}\nNúmero WhatsApp: {zap}\nLink para o WhatsApp: \n{linkzap}'
+    }
 
-
-
-        
+    createCardOnATrelloList(name, trelloList, card_desc, [], None)
 
 def insertOrderOnWhatsOrdersList():
     pass

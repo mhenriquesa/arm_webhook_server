@@ -1,7 +1,9 @@
-from flask import request, Response, Blueprint
-from src.controller import createNewOrderCard, createNewOrderShippingTagOnCart
 from src.controller import createNewOrderShippingTagOnCart
 from src.controller import insertOrderProductsOnShopList
+from src.controller import addressFormRoutine
+from src.controller import createNewOrderCard
+from flask import request, Response, Blueprint
+import json
 
 main = Blueprint('main', __name__)
 
@@ -12,6 +14,9 @@ def hello_world():
 @main.route('/woo_webhook/new_order', methods=['POST'])
 def newOrderRotine():  
     order_informations = request.get_json(silent=True, force=True)
+
+    with open('new_order.json', 'w') as f:
+        json.dump(order_informations, f)
 
     if not order_informations :
         order_informations = {'id': 5212, 'parent_id': 0, 'status': 'processing', 'currency': 'BRL', 'version': '6.8.2', 'prices_include_tax': False, 'date_created': '2022-09-03T17:43:34', 'date_modified': '2022-09-03T17:43:38', 'discount_total': '0.00', 'discount_tax': '0.00', 'shipping_total': '0.00', 'shipping_tax': '0.00', 'cart_tax': '0.00', 'total': '2.00', 'total_tax': '0.00', 'customer_id': 1, 'order_key': 'wc_order_NV5eR8sqabW2k', 'billing': {'first_name': 'Moisés Henrique', 'last_name': 'Silva Araujo', 'company': '', 'address_1': 'Rua Adriático', 'address_2': 'Bloco c Ap 23', 'city': 'Santo André', 'state': 'SP', 'postcode': '09172-180', 'country': 'BR', 'email': 'henriqueator@gmail.com', 'phone': '(11) 98294-2057', 'number': '599', 'neighborhood': 'Jardim do Estádio', 'persontype': 'F', 'cpf': '00753216450', 'rg': '', 'cnpj': '', 'ie': '', 'birthdate': '', 'sex': '', 'cellphone': ''}, 'shipping': {'first_name': 'Moisés Henrique', 'last_name': 'Silva Araujo', 'company': '', 'address_1': 'Rua Sao Vicente', 'address_2': '', 'city': 'Natal', 'state': 'RN', 'postcode': '59037-660', 'country': 'BR', 'phone': '', 'number': '599',
@@ -37,6 +42,16 @@ def mpWebhook():
     print(data)
 
     if data is not None:
-      #Responde o status OK 200
       return Response(status=200)
     return Response(status=200)
+
+@main.route('/address-form', methods=['POST'])
+def recevied_address_form():
+    data = request.form.to_dict()
+
+    addressFormRoutine(data)
+    
+    if data:
+        return Response(status=200)
+
+    return Response(status=500)
