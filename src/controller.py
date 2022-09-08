@@ -2,6 +2,7 @@ from src.melhor_envio_api import addShippigTagToCart
 from src.trello_api import createCardOnATrelloList
 import json
 import re
+import requests
 
 # listId = '6302dd26f5539012a2430c4e' #Pedidos a Fazer - CRM e Pedidos
 # labelsList = ['63037804ceeaa106a8d69189'] #Tag: Site
@@ -243,6 +244,7 @@ def addressFormRoutine(data):
     }
 
     createCardOnATrelloList(name, trelloList, card_desc, [], None)
+    
 
 def insertOrderOnWhatsOrdersList():
     pass
@@ -260,3 +262,21 @@ def posVendaFormRoutine(data):
     card_desc = ''
 
     createCardOnATrelloList(buyer, trello_list, card_desc, [], imgs)
+
+def sendMsgToNewCustomer(customerInfo):
+    formattedPhone = customerInfo['billing']['phone']
+    phoneOnlyNumbers = re.sub(r'[^0-9]', '', formattedPhone)
+    zapnumber = '55' + str(phoneOnlyNumbers) + "@c.us"
+    first_name = customerInfo['billing']['first_name']
+    order_id = customerInfo['id']
+
+    msg = f'Olá, {first_name}! Tudo bem?\n\nVim apenas te informar que já recebemos seu pedido.\n\nNúmero do pedido: {order_id}'
+    url = 'https://1efa-2804-54-14fe-2f00-d6d-302c-80ff-53d4.sa.ngrok.io/new_order'
+    body = {
+        "name" : first_name,
+        "phone" : zapnumber,
+        "msg" : msg
+    }
+
+    response = requests.request("POST", url, data=body)
+    print(response.text)

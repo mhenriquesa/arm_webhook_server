@@ -1,10 +1,10 @@
 from src.controller import createNewOrderShippingTagOnCart
 from src.controller import insertOrderProductsOnShopList
+from src.controller import sendMsgToNewCustomer
 from src.controller import posVendaFormRoutine
 from src.controller import addressFormRoutine
 from src.controller import createNewOrderCard
 from flask import request, Response, Blueprint
-import json
 
 main = Blueprint('main', __name__)
 
@@ -16,11 +16,8 @@ def hello_world():
 def newOrderRotine():  
     order_informations = request.get_json(silent=True, force=True)
 
-    with open('new_order.json', 'w') as f:
-        json.dump(order_informations, f)
-
     if not order_informations :
-        order_informations = {'id': 5212, 'parent_id': 0, 'status': 'processing', 'currency': 'BRL', 'version': '6.8.2', 'prices_include_tax': False, 'date_created': '2022-09-03T17:43:34', 'date_modified': '2022-09-03T17:43:38', 'discount_total': '0.00', 'discount_tax': '0.00', 'shipping_total': '0.00', 'shipping_tax': '0.00', 'cart_tax': '0.00', 'total': '2.00', 'total_tax': '0.00', 'customer_id': 1, 'order_key': 'wc_order_NV5eR8sqabW2k', 'billing': {'first_name': 'Moisés Henrique', 'last_name': 'Silva Araujo', 'company': '', 'address_1': 'Rua Adriático', 'address_2': 'Bloco c Ap 23', 'city': 'Santo André', 'state': 'SP', 'postcode': '09172-180', 'country': 'BR', 'email': 'henriqueator@gmail.com', 'phone': '(11) 98294-2057', 'number': '599', 'neighborhood': 'Jardim do Estádio', 'persontype': 'F', 'cpf': '00753216450', 'rg': '', 'cnpj': '', 'ie': '', 'birthdate': '', 'sex': '', 'cellphone': ''}, 'shipping': {'first_name': 'Moisés Henrique', 'last_name': 'Silva Araujo', 'company': '', 'address_1': 'Rua Sao Vicente', 'address_2': '', 'city': 'Natal', 'state': 'RN', 'postcode': '59037-660', 'country': 'BR', 'phone': '', 'number': '599',
+        order_informations = {'id': 5212, 'parent_id': 0, 'status': 'processing', 'currency': 'BRL', 'version': '6.8.2', 'prices_include_tax': False, 'date_created': '2022-09-03T17:43:34', 'date_modified': '2022-09-03T17:43:38', 'discount_total': '0.00', 'discount_tax': '0.00', 'shipping_total': '0.00', 'shipping_tax': '0.00', 'cart_tax': '0.00', 'total': '2.00', 'total_tax': '0.00', 'customer_id': 1, 'order_key': 'wc_order_NV5eR8sqabW2k', 'billing': {'first_name': 'Ana Cláudia', 'last_name': 'Silva Araujo', 'company': '', 'address_1': 'Rua Adriático', 'address_2': 'Bloco c Ap 23', 'city': 'Santo André', 'state': 'SP', 'postcode': '09172-180', 'country': 'BR', 'email': 'henriqueator@gmail.com', 'phone': '(11) 93903-2693', 'number': '599', 'neighborhood': 'Jardim do Estádio', 'persontype': 'F', 'cpf': '00753216450', 'rg': '', 'cnpj': '', 'ie': '', 'birthdate': '', 'sex': '', 'cellphone': ''}, 'shipping': {'first_name': 'Moisés Henrique', 'last_name': 'Silva Araujo', 'company': '', 'address_1': 'Rua Sao Vicente', 'address_2': '', 'city': 'Natal', 'state': 'RN', 'postcode': '59037-660', 'country': 'BR', 'phone': '', 'number': '599',
         'neighborhood': 'Alecrim'}, 'payment_method': 'cod', 'payment_method_title': 'Pagamento na entrega', 'transaction_id': '', 'customer_ip_address': '2804:54:14fe:2f00:1c2:cd10:4984:787e', 'customer_user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'created_via': 'checkout', 'customer_note': '', 'date_completed': None, 'date_paid': None, 'cart_hash': '49d60906bd651045cc4927d67d7d3265', 'number': '3898', 'meta_data': [{'id': 47683, 'key': '_billing_cpf', 'value': '007.532.164-50'}, {'id': 47684, 'key': '_billing_number', 'value': '599'}, {'id': 47685, 'key': '_billing_neighborhood', 'value': 'Jardim do Estádio'}, {'id': 47686, 'key': '_shipping_number', 'value': '599'}, {'id': 47687, 'key': '_shipping_neighborhood', 'value': 'Jardim do Estádio'}, {'id': 47688,
         'key': 'is_vat_exempt', 'value': 'no'}, {'id': 47689, 'key': '_wcf_flow_id', 'value': '847'}, {'id': 47690, 'key': '_wcf_checkout_id', 'value': '849'}, {'id': 47691, 'key': '_wc_facebook_for_woocommerce_order_placed', 'value': 'yes'}, {'id': 47694, 'key': 'melhorenvio_quotation_v2', 'value': {'2': {'id': 2, 'name': 'SEDEX', 'price': '10.31', 'custom_price': '10.31', 'discount': '10.69', 'currency': 'R$', 'delivery_time': 4, 'delivery_range': {'min': 3, 'max': 4}, 'custom_delivery_time': 4, 'custom_delivery_range': {'min': 3, 'max': 4}, 'packages': [{'price': '10.31', 'discount': '10.69', 'format': 'box', 'weight': '0.20', 'insurance_value': '0.00', 'products': [{'id': '3885', 'quantity': 1}], 'dimensions': {'height': 5, 'width': 11, 'length': 16}}],
         'additional_services': {'receipt': False, 'own_hand': False, 'collect': False}, 'company': {'id': 1, 'name': 'Correios', 'picture': 'https://www.melhorenvio.com.br/images/shipping-companies/correios.png'}}, '3': {'id': 3, 'name': '.Package', 'price': '16.55', 'custom_price': '16.55',
@@ -33,6 +30,7 @@ def newOrderRotine():
     createNewOrderCard(order_informations)
     createNewOrderShippingTagOnCart(order_informations)
     insertOrderProductsOnShopList(order_informations)
+    # sendMsgToNewCustomer(order_informations)
     
     return Response(status=200)
 
