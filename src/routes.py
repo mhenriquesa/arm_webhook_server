@@ -1,9 +1,7 @@
-from src.controller import createNewOrderShippingTagOnCart
-from src.controller import insertOrderProductsOnShopList
-from src.controller import sendMsgToNewCustomer
+from src.controller import newWhatsAppOrdersListRoutine
 from src.controller import posVendaFormRoutine
 from src.controller import addressFormRoutine
-from src.controller import createNewOrderCard
+from src.controller import newOrderRoutine
 from flask import request, Response, Blueprint
 
 main = Blueprint('main', __name__)
@@ -13,7 +11,7 @@ def hello_world():
     return "Hello world!"
 
 @main.route('/woo_webhook/new_order', methods=['POST'])
-def newOrderRotine():  
+def whenReceiveNewOrder():
     order_informations = request.get_json(silent=True, force=True)
 
     if not order_informations :
@@ -26,23 +24,13 @@ def newOrderRotine():
         'additional_services': {'receipt': False, 'own_hand': False, 'collect': True}, 'company': {'id': 5, 'name': 'Via Brasil', 'picture': 'https://www.melhorenvio.com.br/images/shipping-companies/viabrasil.png'}}, '22': {'id': 22, 'name': 'Rodoviário', 'price': '23.07', 'custom_price': '23.07', 'discount': '17.52', 'currency': 'R$', 'delivery_time': 2, 'delivery_range': {'min': 1, 'max': 2}, 'custom_delivery_time': 2, 'custom_delivery_range': {'min': 1, 'max': 2}, 'packages': [{'format': 'box', 'weight': '0.20', 'insurance_value': '2.00', 'products': [{'id': '3885', 'quantity': 1}], 'dimensions': {'height': 5, 'width': 10, 'length': 10}}], 'additional_services': {'receipt': False, 'own_hand': False, 'collect': False}, 'company': {'id': 12, 'name': 'Buslog', 'picture': 'https://www.melhorenvio.com.br/images/shipping-companies/buslog.png'}}, 'date_quotation': '2022-09-03 20:43:03', 'choose_method': 2, 'free_shipping': False, 'diff': True}}, {'id': 47700, 'key': '_new_order_email_sent', 'value': 'true'}, {'id': 47701, 'key': '_wc_facebook_for_woocommerce_purchase_tracked', 'value': 'yes'}], 'line_items': [{'id': 449, 'name': 'Produto teste', 'product_id': 3999, 'variation_id': 0, 'quantity': 1, 'tax_class': '', 'subtotal': '2.00', 'subtotal_tax': '0.00', 'total': '2.00', 'total_tax': '0.00', 'taxes': [], 'meta_data': [], 'sku': '', 'price': 2, 'image': {'id': '', 'src': 'http://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662398190618.jpg'}, 'parent_name': None},{'id': 449, 'name': 'Produto teste', 'product_id': 3885, 'variation_id': 0, 'quantity': 1, 'tax_class': '', 'subtotal':
         '2.00', 'subtotal_tax': '0.00', 'total': '2.00', 'total_tax': '0.00', 'taxes': [], 'meta_data': [], 'sku': '', 'price': 2, 'image': {'id': '', 'src': 'http://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662398178249.jpg'}, 'parent_name': None}], 'tax_lines': [], 'shipping_lines': [{'id': 450, 'method_title': 'Frete grátis', 'method_id': 'free_shipping', 'instance_id': '29', 'total': '0.00', 'total_tax': '0.00', 'taxes': [], 'meta_data': [{'id': 3601, 'key': 'Itens', 'value': 'Produto teste &times; 1', 'display_key': 'Itens', 'display_value': 'Produto teste &times; 1'}]}], 'fee_lines': [], 'coupon_lines': [], 'refunds': [], 'payment_url': 'https://anaramosmoda.com.br/finalizar-compra/order-pay/3898/?pay_for_order=true&key=wc_order_NV5eR8sqabW2k', 'is_editable': False, 'needs_payment': False, 'needs_processing': True,
         'date_created_gmt': '2022-09-03T20:43:34', 'date_modified_gmt': '2022-09-03T20:43:38', 'date_completed_gmt': None, 'date_paid_gmt': None, 'correios_tracking_code': '', 'currency_symbol': 'R$', '_links': {'self': [{'href': 'https://anaramosmoda.com.br/wp-json/wc/v3/orders/3898'}], 'collection': [{'href': 'https://anaramosmoda.com.br/wp-json/wc/v3/orders'}], 'customer': [{'href': 'https://anaramosmoda.com.br/wp-json/wc/v3/customers/1'}]}}
-
-    createNewOrderCard(order_informations)
-    createNewOrderShippingTagOnCart(order_informations)
-    insertOrderProductsOnShopList(order_informations)
-    # sendMsgToNewCustomer(order_informations)
+    
+    newOrderRoutine(order_informations)
+    # insertOrderProductsOnShopList(order_informations)
+    
     
     return Response(status=200)
 
-@main.route('/mp_webhook', methods=['POST'])
-def mpWebhook():
-    #recebe o payload enviado pelo request recebido
-    data = request.get_json(silent=True, force=True)
-    print(data)
-
-    if data is not None:
-      return Response(status=200)
-    return Response(status=200)
 
 @main.route('/address-form', methods=['POST'])
 def recevied_address_form():
@@ -64,3 +52,9 @@ def pos_venda():
     if data:
         return Response(status=200)
     return Response(status=500)
+
+@main.route('/create_whatsapp_orders_list', methods=['POST'])
+def whenNewWhatsappOrdersList():
+    newWhatsAppOrdersListRoutine()
+
+    return Response(status=200)

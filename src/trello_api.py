@@ -17,29 +17,23 @@ def getAttachmentsFromCard(idCard):
   }
 
   response = requests.request("GET", url, headers=headers, params=query)
-  print(response)
 
   listCards = response.json()
-  print(json.dumps(listCards, indent=4))
   return listCards
 
-
-def getCardsFromATrelloList(listId, urlAttach):
+def getCardsFromATrelloList(listId):
   url = mainTrelloEndpoint + f"lists/{listId}/cards"
   query = {
    'key': trelloKey,
-   'token': trelloToken,
-   'url' : urlAttach,
-   'mimeType' : 'image/jpg',
-   'setCover' : False
+   'token': trelloToken
   }
 
   response = requests.request("GET", url, headers=headers, params=query)
   print(response)
 
-  listCards = response.json()
+  cardsList = response.json()
 
-  return listCards
+  return cardsList
 
 def createAttachmentsOnCard(idCard, urlAttach):
     url = mainTrelloEndpoint + f"cards/{idCard}/attachments"
