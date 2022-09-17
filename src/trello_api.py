@@ -61,6 +61,7 @@ def createCardOnATrelloList(card_name, listId, desc, idLabelsList, urlAttachs):
     
     response = requests.request("POST", url, headers=headers, params=query)
     print(response.text)
+    print(response)
     card_info = response.json()
 
     if urlAttachs: 

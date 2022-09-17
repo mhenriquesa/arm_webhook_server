@@ -1,9 +1,13 @@
 from src.melhor_envio_api import addShippigTagToCart
-from src.trello_api import createCardOnATrelloList, getAttachmentsFromCard
 from src.trello_api import getCardsFromATrelloList
+from src.trello_api import createCardOnATrelloList
+from src.trello_api import getAttachmentsFromCard
+from src.woo_api import createPendingOrder
+from src.woo_api import getProductInfo
+import requests
 import json
 import re
-import requests
+
 
 # listId = '6302dd26f5539012a2430c4e' #Pedidos a Fazer - CRM e Pedidos
 # labelsList = ['63037804ceeaa106a8d69189'] #Tag: Site
@@ -202,6 +206,32 @@ def addressFormRoutine(data):
     cep = data['fields[cep][value]']
     cpf = data['fields[cpf][value]']
     zap = data['fields[zap][value]']
+    email = data['fields[email][value]']
+    forma = data['fields[forma][value]']
+
+    produtos = data['fields[produtos][value]']
+    products_codes = re.findall(r"\d{4}", produtos)
+    products_codes_int = [int(i) for i in products_codes]
+    line_items = []
+
+    print(products_codes_int)
+
+
+    # for code in products_codes_int:
+    #     product_info = getProductInfo(code)
+    #     prod_dict = {
+	# 		"id": product_info['id'],
+	# 		"name": product_info['name'],
+	# 		"price": product_info['sale_price'],
+	# 		"image": product_info['images'][0]['src'],
+	# 		"quantity": 1
+	# 		}
+        
+    #     line_items.append(prod_dict)
+    #     print(json.dumps(product_info, indent=3))
+
+
+
 
     phoneOnlyNumbers = re.sub(r'[^0-9]', '', zap)
     linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
@@ -212,6 +242,9 @@ def addressFormRoutine(data):
 
     createCardOnATrelloList(name, trelloList, card_desc, [], None)
     createNewOrderShippingTagOnCart(name, cpf, address_1, number, complement, neighbor, city, state, cep, None )
+    # createPendingOrder(name, '', address_1, number, neighbor, complement, city, state, cep, email, zap, line_items, cpf, forma)
+
+
     
 
 def insertOrderOnWhatsOrdersList():
@@ -231,20 +264,34 @@ def posVendaFormRoutine(data):
 
     createCardOnATrelloList(buyer, trello_list, card_desc, [], imgs)
 
-def sendMsgToNewCustomer(clientFirstName, phone ,order_id):
+def sendMsgToCustomer(clientFirstName, phone ,order_id):
     phoneOnlyNumbers = re.sub(r'[^0-9]', '', phone)
     zapnumber = '55' + str(phoneOnlyNumbers) + "@c.us"
 
-    msg = f'Olá, {clientFirstName}! Tudo bem?\n\nVim apenas te informar que já recebemos seu pedido.\n\nNúmero do pedido: {order_id}'
-    url = 'http://localhost:8000/new_order'
+    msg = f'Olá, {clientFirstName}! Tudo bem?\n\nSou a Aninha da Ana Ramos Moda\n\nParabéns por sua compra. Assim que eu tiver o seu código de rastreamento, venho aqui te informar.\n\n Agora é só aguardar seu look em casa! \n\nNúmero do pedido: {order_id}'
+    url = 'https://arm-whatsapp.herokuapp.com/customer_update'
     body = {
-        "name" : clientFirstName,
-        "phone" : zapnumber,
-        "msg" : msg
+        "number" : zapnumber,
+        "message" : msg
     }
 
     response = requests.request("POST", url, data=body)
     print(response.text)
+
+
+    
+def sendOrderToWhatsAppList(client_name, products_images):
+    # url = 'http://localhost:8000/add_order_to_Whatsapp_list'
+    url = 'https://arm-whatsapp.herokuapp.com/add_order_to_Whatsapp_list'
+    body = {
+        "chatId" : '120363043296540441@g.us',
+        "client_name" : client_name,
+        "products_images" : products_images,
+    }
+
+    response = requests.request("POST", url, data=body)
+    print(response.text)
+        
 
 def newOrderRoutine(order_informations):
     order = order_informations['id']
@@ -261,11 +308,11 @@ def newOrderRoutine(order_informations):
     formattedPhone = order_informations['billing']['phone']
     phoneOnlyNumbers = re.sub(r'[^0-9]', '', formattedPhone)
     linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
+    pendingOrdersTrelloList = '63191b83a8e4af048326a8b2' #Pendentes de aprovação
+
     products = order_informations['line_items']
     urlsImagesProducts = []
     products_codes = ''
-    pendingOrdersTrelloList = '63191b83a8e4af048326a8b2' #Pendentes de aprovação
-
 
     for product in products:
         if product['variation_id'] > 0:
@@ -279,15 +326,15 @@ def newOrderRoutine(order_informations):
     card_desc = f'''Fone para contato: {formattedPhone}\nLink WhatsApp: \n{linkzap}'''
 
         
-    createCardOnATrelloList(f"#{order} - {client_name} / {products_codes}",pendingOrdersTrelloList, card_desc, [], urlsImagesProducts)
     createNewOrderShippingTagOnCart(client_name, cpf, address, number, complement, neighbor, city, state, cep, products)
-    # sendMsgToNewCustomer(client_first_name, formattedPhone, order)
-
-
+    createCardOnATrelloList(f"#{order} - {client_name} / {products_codes}",pendingOrdersTrelloList, card_desc, [], urlsImagesProducts)
+    sendOrderToWhatsAppList(client_name, urlsImagesProducts)
+    sendMsgToCustomer(client_first_name, formattedPhone, order)
+    
 def getWhatsAppOrdersList(trelloOrdersCards):
     whatsAppOrders = []
 
-    for card in trelloOrdersCards[2:]:
+    for card in trelloOrdersCards[9:]:
         cardAttachsList = getAttachmentsFromCard(card['id'])
         urlsImagesAttachs = []
 
@@ -323,6 +370,7 @@ def newWhatsAppOrdersListRoutine():
     trelloOrdersList = '6302dd26f5539012a2430c4e'
     trelloOrdersCards = getCardsFromATrelloList(trelloOrdersList)
     whatsAppOrders = getWhatsAppOrdersList(trelloOrdersCards)
+    print(whatsAppOrders)
     sendOrdersListToWhatsApp(whatsAppOrders)
 
 
