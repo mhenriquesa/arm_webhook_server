@@ -1,7 +1,6 @@
 # Podemos obter informações de quadros, listas cartões do trello usando a API
 import os
 import requests
-import json
 from datetime import datetime
 
 trelloKey = os.environ.get('TRELLO_KEY') 
@@ -45,7 +44,8 @@ def createAttachmentsOnCard(idCard, urlAttach):
     }
 
     response = requests.request("POST", url, headers=headers, params=query)
-    print(response.text)
+    print('Resposta vindo Trello: Criar um anexo')
+    print(response)
 
 def createCardOnATrelloList(card_name, listId, desc, idLabelsList, urlAttachs):
   
@@ -60,7 +60,8 @@ def createCardOnATrelloList(card_name, listId, desc, idLabelsList, urlAttachs):
     }
     
     response = requests.request("POST", url, headers=headers, params=query)
-    print(response.text)
+
+    print('Resposta do Trello: Criar cartão')
     print(response)
     card_info = response.json()
 

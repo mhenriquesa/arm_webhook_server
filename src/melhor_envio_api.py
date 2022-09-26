@@ -14,5 +14,5 @@ headers = {
 def addShippigTagToCart(ship_info):
     response = requests.request("POST", main_url + "cart", headers=headers, data=ship_info)
 
-    print('Status do Pedido : ')
-    print(response.text)
+    print('Status do Pedido vindo do Melhor Envio. Criação de etiqueta: ')
+    print(response)

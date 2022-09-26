@@ -1,6 +1,4 @@
-from src.controller import newWhatsAppOrdersListRoutine
 from flask import request, Response, Blueprint
-from src.controller import posVendaFormRoutine
 from src.controller import addressFormRoutine
 from src.controller import newOrderRoutine
 
@@ -27,7 +25,6 @@ def whenReceiveNewOrder():
     
     newOrderRoutine(order_informations)
     
-    
     return Response(status=201)
 
 
@@ -38,19 +35,3 @@ def recevied_address_form():
     addressFormRoutine(data)
     return Response(status=200)
     
-
-@main.route('/pos-venda', methods=['POST'])
-def pos_venda():
-    data = request.form.to_dict()
-    print(data)
-    posVendaFormRoutine(data)
-
-    if data:
-        return Response(status=200)
-    return Response(status=500)
-
-@main.route('/create_whatsapp_orders_list', methods=['POST'])
-def whenNewWhatsappOrdersList():
-    newWhatsAppOrdersListRoutine()
-
-    return Response(status=200)
