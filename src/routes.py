@@ -31,6 +31,7 @@ def whenReceiveNewOrder():
 @main.route('/address-form', methods=['POST'])
 def recevied_address_form():
     data = request.form.to_dict()
+    print(data)
 
     addressFormRoutine(data)
     return Response(status=200)
