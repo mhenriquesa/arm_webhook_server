@@ -1,9 +1,15 @@
-from flask import request, Response, Blueprint
+from flask import request, Response, Blueprint, render_template
 from src.controller import addressFormRoutine
 from src.controller import newOrderRoutine
 
 main = Blueprint('main', __name__)
 
+messages = [{'title': 'Message One',
+             'content': 'Message One Content'},
+            {'title': 'Message Two',
+             'content': 'Message Two Content'}
+            ]
+            
 @main.route('/')
 def hello_world():
     return "Hello world!"
@@ -35,4 +41,9 @@ def recevied_address_form():
 
     addressFormRoutine(data)
     return Response(status=200)
+
+@main.route('/order-form', methods=['GET'])
+def order_form_page():
+
+    return render_template('order-form.html')
     
