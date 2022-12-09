@@ -158,7 +158,7 @@ def newOrderRoutine(order_informations):
     products_info = getProductsInfoFromNewOrder(order.products)
     
     createNewOrderShippingTagOnCart(order.client_name, order.cpf, order.address, order.number, order.complement, order.neighbor, order.city, order.state, order.cep, order.products)
-    # # createCardOnATrelloList(f"#{order} - {client_name} / {products_codes}",pendingOrdersTrelloList, card_desc, [], urlsImagesProducts)
+    # createCardOnATrelloList(f"#{order} - {client_name} / {products_codes}",pendingOrdersTrelloList, card_desc, [], urlsImagesProducts)
 
 
 

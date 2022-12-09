@@ -10,7 +10,9 @@ def wooRequests(type_of_req, urlEndPoint, queryParams, data):
 	response = requests.request(type_of_req, mainUrl + urlEndPoint, headers=headers, params=queryParams, data=data)
 	json_response = response.json()
 	
-	print(json.dumps(json_response, indent=4))
+	# print(json.dumps(json_response, indent=4))
+	print("Resposta do Woocommerce - Informações de Produto: ", response)
+
 	return json_response
 
 
@@ -21,8 +23,8 @@ def getWooProcessingOrders():
 	return json_processing_orders
 
 def getProductInfo(id):
-	product_info = wooRequests('GET', f'products/{id}', None, None) 
-	print(product_info)
+	product_info = wooRequests('GET', f'products/{id}', None, None)
+
 	return product_info
 
 
