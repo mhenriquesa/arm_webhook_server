@@ -47,24 +47,24 @@ def createAttachmentsOnCard(idCard, urlAttach):
     print('Resposta vindo Trello: Criar um anexo')
     print(response)
 
-def createCardOnATrelloList(card_name, listId, desc, idLabelsList, urlAttachs):
+# def createCardOnATrelloList(card_name, listId, desc, idLabelsList, urlAttachs):
   
-    url = mainTrelloEndpoint + "cards/"
-    query = {"name" : card_name, 
-    "idLabels" : idLabelsList, 
-    "idList" : listId, 
-    "key": trelloKey, 
-    "token" : trelloToken, 
-    "desc" : desc,
-    "start" : datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S') 
-    }
+#     url = mainTrelloEndpoint + "cards/"
+#     query = {"name" : card_name, 
+#     "idLabels" : idLabelsList, 
+#     "idList" : listId, 
+#     "key": trelloKey, 
+#     "token" : trelloToken, 
+#     "desc" : desc,
+#     "start" : datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S') 
+#     }
     
-    response = requests.request("POST", url, headers=headers, params=query)
+#     response = requests.request("POST", url, headers=headers, params=query)
 
-    print('Resposta do Trello: Criar cartão')
-    print(response)
-    card_info = response.json()
+#     print('Resposta do Trello: Criar cartão')
+#     print(response)
+#     card_info = response.json()
 
-    if urlAttachs: 
-        for url in urlAttachs:
-            createAttachmentsOnCard(card_info['id'], url)
+#     if urlAttachs: 
+#         for url in urlAttachs:
+#             createAttachmentsOnCard(card_info['id'], url)

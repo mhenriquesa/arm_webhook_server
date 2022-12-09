@@ -1,6 +1,7 @@
 from src.woo_api import getProductInfo
 from datetime import datetime
 import re
+import json
 
 class Order:
   def __init__(self, form_data) -> None:
@@ -12,7 +13,19 @@ class Order:
     self.shipping_type = 'PAC'
     self.shipping_price = 0
     self.date_purchase = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+    self.total_value = ''
   
+  def to_json(self):
+    return json.dumps(self, default=lambda o: o.__dict__, indent=4)
+  
+  def get_products_imgs_urls_list(self):
+    products_imgs_urls_list = []
+
+    for product in self.products:
+      products_imgs_urls_list.append(product['img_url'])
+    
+    return products_imgs_urls_list
+
   @classmethod
   def get_products(cls, products_codes):
     order_products_list = []

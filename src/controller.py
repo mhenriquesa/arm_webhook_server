@@ -1,5 +1,5 @@
 from src.melhor_envio_api import addShippigTagToCart
-from src.trello_api import createCardOnATrelloList
+# from src.trello_api import createCardOnATrelloList
 from src.Models import New_Order
 import json
 import re
@@ -132,7 +132,7 @@ def addressFormRoutine(data):
     }
 
     createNewOrderShippingTagOnCart(name, cpf, address_1, number, complement, neighbor, city, state, cep, None )
-    createCardOnATrelloList(name, trelloList, card_desc, [], None)
+    # createCardOnATrelloList(name, trelloList, card_desc, [], None)
 
 def getProductsInfoFromNewOrder(order_products):
     imgs_urls = []
