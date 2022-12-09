@@ -36,7 +36,9 @@ class TrelloCard:
     }
 
     response = requests.request("POST", url, headers=TrelloCard.headers_request, params=query)
-    print(response.text)
+
+
+    return response.json()
   
   def set_attachs(self, card_id):
     url = TrelloCard.cards_endpoint + f"{card_id}/attachments"
@@ -47,7 +49,11 @@ class TrelloCard:
         'mimeType' : 'image/jpg'
     }
 
+    for attach_url in self.attachs_urls:
+      query['url'] = attach_url
 
-    for url in self.urlsAttachs:
-      pass
+      response = requests.request("POST", url, headers=TrelloCard.headers_request, params=query)
+      print('Resposta vindo Trello - Anexo ao Cartão: ', response)
+
+
 

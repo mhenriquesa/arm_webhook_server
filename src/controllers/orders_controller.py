@@ -13,10 +13,7 @@ def start_address_form_routine(data):
   trello_card_labels = []
   
   trello_card = TrelloCard(user.name, trello_card_desc, trello_list_id, trello_card_labels, products_imgs_urls_list )
+  card_info = trello_card.create()
 
-  trello_card.create()
-
-  # print(trello_card.to_json())
-  # print('==================')
-  # print(order.to_json())
+  trello_card.set_attachs(card_info['id'])
   
