@@ -1,5 +1,6 @@
 from src.melhor_envio_api import addShippigTagToCart
 from src.trello_api import createCardOnATrelloList
+from src.Models import New_Order
 import json
 import re
 
@@ -130,43 +131,34 @@ def addressFormRoutine(data):
         f'Nome : {name}\nRua/Avenida : {address_1}\nNúmero: {number}\nComplemento: {complement}\nBairro: {neighbor}\nObs: {observacao}\nCidade: {city}\nEstado: {state}\nCep: {cep}\n\n------------------------\n\nCPF: {cpf}\nNúmero WhatsApp: {zap}\nLink para o WhatsApp: \n{linkzap}'
     }
 
-    createCardOnATrelloList(name, trelloList, card_desc, [], None)
     createNewOrderShippingTagOnCart(name, cpf, address_1, number, complement, neighbor, city, state, cep, None )
+    createCardOnATrelloList(name, trelloList, card_desc, [], None)
 
-def newOrderRoutine(order_informations):
-    order = order_informations['id']
-    client_first_name = order_informations['shipping']['first_name']
-    client_name = client_first_name + ' ' + order_informations['shipping']['last_name']
-    cpf = order_informations['billing']['cpf']
-    address =order_informations['shipping']['address_1']
-    number = order_informations['shipping']['number']
-    complement = order_informations['shipping']['address_2']
-    neighbor = order_informations['shipping']['neighborhood']
-    city = order_informations['shipping']['city']
-    state = order_informations['shipping']['state']
-    cep = order_informations['shipping']['postcode']
-    formattedPhone = order_informations['billing']['phone']
-    phoneOnlyNumbers = re.sub(r'[^0-9]', '', formattedPhone)
-    linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
-    pendingOrdersTrelloList = '63191b83a8e4af048326a8b2' #Pendentes de aprovação
-
-    products = order_informations['line_items']
-    urlsImagesProducts = []
+def getProductsInfoFromNewOrder(order_products):
+    imgs_urls = []
     products_codes = ''
 
-    for product in products:
+    for product in order_products:
         if product['variation_id'] > 0:
             products_codes = f"{products_codes} {str(product['variation_id'])}"
         else:
             products_codes = f"{products_codes} {str(product['product_id'])}"
       
         prod_img_url = product['image']['src']
-        urlsImagesProducts.append(prod_img_url)
-    
-    card_desc = f'''Fone para contato: {formattedPhone}\nLink WhatsApp: \n{linkzap}'''
+        imgs_urls.append(prod_img_url)
 
-    createNewOrderShippingTagOnCart(client_name, cpf, address, number, complement, neighbor, city, state, cep, products)
-    createCardOnATrelloList(f"#{order} - {client_name} / {products_codes}",pendingOrdersTrelloList, card_desc, [], urlsImagesProducts)
+    return {
+        "imgs_urls" : imgs_urls,
+        "codes" : products_codes
+    }
+
+
+def newOrderRoutine(order_informations):
+    order = New_Order(order_informations)
+    products_info = getProductsInfoFromNewOrder(order.products)
+    
+    createNewOrderShippingTagOnCart(order.client_name, order.cpf, order.address, order.number, order.complement, order.neighbor, order.city, order.state, order.cep, order.products)
+    # # createCardOnATrelloList(f"#{order} - {client_name} / {products_codes}",pendingOrdersTrelloList, card_desc, [], urlsImagesProducts)
 
 
 

@@ -1,14 +1,8 @@
 from flask import request, Response, Blueprint, render_template
-from src.controller import addressFormRoutine
 from src.controller import newOrderRoutine
+from src.controllers import orders_controller
 
 main = Blueprint('main', __name__)
-
-messages = [{'title': 'Message One',
-             'content': 'Message One Content'},
-            {'title': 'Message Two',
-             'content': 'Message Two Content'}
-            ]
             
 @main.route('/')
 def hello_world():
@@ -35,11 +29,11 @@ def whenReceiveNewOrder():
 
 
 @main.route('/address-form', methods=['POST'])
-def recevied_address_form():
+def user_sends_address_form():
     data = request.form.to_dict()
-    print(data)
 
-    addressFormRoutine(data)
+    orders_controller.start_address_form_routine(data)
+    
     return Response(status=200)
 
 @main.route('/order-form', methods=['GET'])
