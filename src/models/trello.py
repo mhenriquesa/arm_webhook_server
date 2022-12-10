@@ -1,9 +1,10 @@
+from src.models.order import Order
 from datetime import datetime
 import requests
 import json
 import os
 
-class TrelloCard:
+class Trello:
   cards_endpoint = 'https://api.trello.com/1/cards/'
   trelloKey = os.environ.get('TRELLO_KEY') 
   trelloToken = os.environ.get('TRELLO_TOKEN')
@@ -24,36 +25,50 @@ class TrelloCard:
   def to_json(self):
     return json.dumps(self, default=lambda o: o.__dict__, indent=4)
   
-  def create(self):
-    url = TrelloCard.cards_endpoint
-    query = {"name" : self.name, 
-    "labels_ids" : None, 
-    "idList" : self.list_id, 
-    "key": TrelloCard.trelloKey, 
-    "token" : TrelloCard.trelloToken, 
-    "desc" : self.desc,
-    "start" : self.start 
+  @classmethod
+  def create_card(cls, name, list_id, desc, start, labels_ids):
+    url = Trello.cards_endpoint
+    query = {"name" : name, 
+    "labels_ids" : labels_ids, 
+    "idList" : list_id, 
+    "key": Trello.trelloKey, 
+    "token" : Trello.trelloToken,
+    "desc" : desc,
+    "start" : start 
     }
 
-    response = requests.request("POST", url, headers=TrelloCard.headers_request, params=query)
+    response = requests.request("POST", url, headers=Trello.headers_request, params=query)
+    print('Trello - Criar cartão: ', response)
 
 
     return response.json()
   
-  def set_attachs(self, card_id):
-    url = TrelloCard.cards_endpoint + f"{card_id}/attachments"
+  @classmethod
+  def set_attachs(cls, card_id, attachs_urls):
+    url = Trello.cards_endpoint + f"{card_id}/attachments"
     
     query = {
-        'key': TrelloCard.trelloKey,
-        'token': TrelloCard.trelloToken,
+        'key': Trello.trelloKey,
+        'token': Trello.trelloToken,
         'mimeType' : 'image/jpg'
     }
 
-    for attach_url in self.attachs_urls:
+    for attach_url in attachs_urls:
       query['url'] = attach_url
 
-      response = requests.request("POST", url, headers=TrelloCard.headers_request, params=query)
+      response = requests.request("POST", url, headers=Trello.headers_request, params=query)
       print('Resposta vindo Trello - Anexo ao Cartão: ', response)
+    
+  @classmethod
+  def create_card_in_address_form_list(cls, user, order):
+    order_products = Order.get_products_from_code_str(order.products)
+    card_desc = f'Nome : {user.name}\nRua/Avenida : {user.address_1}\nNúmero: {user.number}\nComplemento: {user.complement}\nBairro: {user.neighbor}\nObs: {user.observacao}\nCidade: {user.city}\nEstado: {user.state}\nCep: {user.cep}\n\n------------------------\n\nCPF: {user.cpf}\nNúmero WhatsApp: {user.zap}\nLink para o WhatsApp: \n{user.linkzap}'
+    list_id = "6315059660711c0109c21c09"
+    trello_card_labels = []
+    start_time = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 
+    card_info = Trello.create_card(user.name, list_id, card_desc, start_time, trello_card_labels)
+    urls_attachs_list = Order.get_products_imgs_urls_list(order_products)
+    Trello.set_attachs(card_info['id'], urls_attachs_list)
 
 

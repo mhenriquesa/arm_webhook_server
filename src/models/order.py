@@ -9,7 +9,7 @@ class Order:
 
     self.id = '' #get_order_id
     self.buyer_id = ''#get_user_id
-    self.products = Order.get_products(products_codes_from_url)
+    self.products = products_codes_from_url
     self.shipping_type = 'PAC'
     self.shipping_price = 0
     self.date_purchase = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
@@ -17,20 +17,21 @@ class Order:
   
   def to_json(self):
     return json.dumps(self, default=lambda o: o.__dict__, indent=4)
-  
-  def get_products_imgs_urls_list(self):
+
+  @classmethod
+  def get_products_imgs_urls_list(cls, products_list):
     products_imgs_urls_list = []
 
-    for product in self.products:
+    for product in products_list:
       products_imgs_urls_list.append(product['img_url'])
     
     return products_imgs_urls_list
 
   @classmethod
-  def get_products(cls, products_codes):
+  def get_products_from_code_str(cls, products_codes_in_string):
     order_products_list = []
     
-    products_codes_in_list = re.findall(r"\d{4}", products_codes)
+    products_codes_in_list = re.findall(r"\d{4}", products_codes_in_string)
     products_codes_numbers = [int(i) for i in products_codes_in_list]
 
     for code in products_codes_numbers:
