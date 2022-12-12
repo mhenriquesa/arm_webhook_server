@@ -4,6 +4,7 @@ from src.Models import New_Order
 import json
 import re
 
+
 def createNewOrderShippingTagOnCart(client_name, cpf, address, number, complement, neighbor, city, state, cep, products):
     payload_sample = {
         "service": 2,
@@ -44,10 +45,10 @@ def createNewOrderShippingTagOnCart(client_name, cpf, address, number, complemen
         "products": [],
         "volumes": [
             {
-            "height": 10,
-            "width": 5,
-            "length": 10,
-            "weight": 0.2
+                "height": 10,
+                "width": 5,
+                "length": 10,
+                "weight": 0.2
             }
         ],
         "options": {
@@ -57,17 +58,17 @@ def createNewOrderShippingTagOnCart(client_name, cpf, address, number, complemen
             "reverse": False,
             "non_commercial": False,
             "invoice": {
-            "key": ""
+                "key": ""
             },
             "platform": "Ana Ramos Moda",
             "tags": [
-            {
-                "tag": "",
-                "url": None
-            }
+                {
+                    "tag": "",
+                    "url": None
+                }
             ]
         }
-        }
+    }
 
     payload_sample["service"] = 2 if state == 'SP' else 1
     payload_sample["to"]['name'] = client_name
@@ -79,31 +80,31 @@ def createNewOrderShippingTagOnCart(client_name, cpf, address, number, complemen
     payload_sample["to"]['state_abbr'] = state
     payload_sample["to"]['postal_code'] = cep
     payload_sample["products"] = products
-   
+
     payload_sample["to"]['document'] = cpf
-    
 
     products_declaration = []
 
     if products:
 
         for product in products:
-            orderItems = { 
-            "name" : product['name'],
-            "quantity" : product['quantity'],
-            "unitary_value" : product['price'],
+            orderItems = {
+                "name": product['name'],
+                "quantity": product['quantity'],
+                "unitary_value": product['price'],
             }
 
             products_declaration.append(orderItems)
-        
-    
+
     new_payload_json_string = json.dumps(payload_sample)
 
     addShippigTagToCart(new_payload_json_string)
 
+
 def addressFormRoutine(data):
-    #dados recebidos do formlário de endereço do site ARM
-    trelloList = "6315059660711c0109c21c09" # Lista de destino no trello: Leads que preencheram Formulário
+    # dados recebidos do formlário de endereço do site ARM
+    # Lista de destino no trello: Leads que preencheram Formulário
+    trelloList = "6315059660711c0109c21c09"
 
     # form_name = data['form[name]']
     name = data['fields[name][value]']
@@ -127,12 +128,14 @@ def addressFormRoutine(data):
     phoneOnlyNumbers = re.sub(r'[^0-9]', '', zap)
     linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
 
-    card_desc = { 
+    card_desc = {
         f'Nome : {name}\nRua/Avenida : {address_1}\nNúmero: {number}\nComplemento: {complement}\nBairro: {neighbor}\nObs: {observacao}\nCidade: {city}\nEstado: {state}\nCep: {cep}\n\n------------------------\n\nCPF: {cpf}\nNúmero WhatsApp: {zap}\nLink para o WhatsApp: \n{linkzap}'
     }
 
-    createNewOrderShippingTagOnCart(name, cpf, address_1, number, complement, neighbor, city, state, cep, None )
+    createNewOrderShippingTagOnCart(
+        name, cpf, address_1, number, complement, neighbor, city, state, cep, None)
     # createCardOnATrelloList(name, trelloList, card_desc, [], None)
+
 
 def getProductsInfoFromNewOrder(order_products):
     imgs_urls = []
@@ -143,26 +146,20 @@ def getProductsInfoFromNewOrder(order_products):
             products_codes = f"{products_codes} {str(product['variation_id'])}"
         else:
             products_codes = f"{products_codes} {str(product['product_id'])}"
-      
+
         prod_img_url = product['image']['src']
         imgs_urls.append(prod_img_url)
 
     return {
-        "imgs_urls" : imgs_urls,
-        "codes" : products_codes
+        "imgs_urls": imgs_urls,
+        "codes": products_codes
     }
 
 
 def newOrderRoutine(order_informations):
     order = New_Order(order_informations)
     products_info = getProductsInfoFromNewOrder(order.products)
-    
-    createNewOrderShippingTagOnCart(order.client_name, order.cpf, order.address, order.number, order.complement, order.neighbor, order.city, order.state, order.cep, order.products)
+
+    createNewOrderShippingTagOnCart(order.client_name, order.cpf, order.address, order.number,
+                                    order.complement, order.neighbor, order.city, order.state, order.cep, order.products)
     # createCardOnATrelloList(f"#{order} - {client_name} / {products_codes}",pendingOrdersTrelloList, card_desc, [], urlsImagesProducts)
-
-
-
-
-
-
-    

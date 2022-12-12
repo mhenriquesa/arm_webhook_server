@@ -1,4 +1,4 @@
-#cria as etiquetas de envio no melhor envio. (coloca no carrinho)
+# cria as etiquetas de envio no melhor envio. (coloca no carrinho)
 import os
 import requests
 token = os.environ.get('ARM_MENVIO')
@@ -9,10 +9,12 @@ headers = {
     'Content-Type': 'application/json',
     'Authorization': token,
     'User-Agent': 'Aplicação henriqueator@gmail.com'
-    }
+}
+
 
 def addShippigTagToCart(ship_info):
-    response = requests.request("POST", main_url + "cart", headers=headers, data=ship_info)
+    response = requests.request(
+        "POST", main_url + "cart", headers=headers, data=ship_info)
 
     print('Status do Pedido vindo do Melhor Envio. Criação de etiqueta: ')
     print(response)
