@@ -47,10 +47,6 @@ def user_sends_address_form():
     order = orders_controller.get_order_data(data)
 
     orders_controller.create_card_in_address_form_list(user, order)
-    # orders_controller.create_shipping_tag_on_cart(user, order)
-
-    # tag_in_json_str = new_tag.to_json()
-    # x = tag_in_json_str.replace('"de":', '"from":')
-    # print(x)
+    orders_controller.create_shipping_tag_on_cart(user, order)
 
     return Response(status=200)

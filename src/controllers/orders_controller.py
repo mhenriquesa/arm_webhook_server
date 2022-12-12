@@ -17,3 +17,5 @@ def create_shipping_tag_on_cart(user_data_from_form, order_data_from_form):
 
     new_tag = ShippingTag(user_data_from_form.name, user_data_from_form.cpf, user_data_from_form.address_1, user_data_from_form.complement, user_data_from_form.number,
                           user_data_from_form.neighbor, user_data_from_form.city, user_data_from_form.state, user_data_from_form.cep, order_data_from_form.products, None)
+
+    new_tag.send_to_cart()

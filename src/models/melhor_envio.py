@@ -24,6 +24,8 @@ class MelhorEnvio:
             f"Resposta do Melhor envio para requisição - {description_req}: ", response)
         print(response.text)
 
+        return response.json()
+
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__, indent=4)
 
@@ -83,6 +85,7 @@ class ShippingTag(MelhorEnvio):
         self.plataform = "Ana Ramos Moda - Moda Feminina"
         self.tags = tags
 
-    def send_to_cart(self, payload):
+    def send_to_cart(self):
+        payload = self.to_json().replace('"de":', '"from":')
 
-        MelhorEnvio.send_request("cart", payload, "Send tag to cart")
+        MelhorEnvio.send_request("cart", payload, "Criar etiqueta no carrinho")
