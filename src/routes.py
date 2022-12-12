@@ -1,4 +1,4 @@
-from flask import request, Blueprint, render_template
+from flask import request, Blueprint
 from flask.wrappers import Response
 
 from src.controller import newOrderRoutine
@@ -20,6 +20,14 @@ def order_form_page():
     return views_controller.order_form()
 
 
+@main.route('/address-form', methods=['POST'])
+def address_form():
+    data = request.form.to_dict()
+    orders_controller.address_form(data)
+
+    return Response(status=200)
+
+
 @main.route('/new_order', methods=['POST'])
 def whenReceiveNewOrder():
     order_informations = request.get_json(silent=True, force=True)
@@ -38,15 +46,3 @@ def whenReceiveNewOrder():
     newOrderRoutine(order_informations)
 
     return Response(status=201)
-
-
-@main.route('/address-form', methods=['POST'])
-def user_sends_address_form():
-    data = request.form.to_dict()
-    user = users_controller.get_user_data(data)
-    order = orders_controller.get_order_data(data)
-
-    orders_controller.create_card_in_address_form_list(user, order)
-    orders_controller.create_shipping_tag_on_cart(user, order)
-
-    return Response(status=200)

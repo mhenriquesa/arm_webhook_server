@@ -37,8 +37,9 @@ class ShippingTag(MelhorEnvio):
     CEP_CIA = os.environ.get("CEP_CIA")
     EMAIL_CIA = os.environ.get("EMAIL_CIA")
 
-    def __init__(self, shipping_name, shipping_cpf, shipping_address_1, shipping_complement, shipping_number, shipping_bairro, shipping_city, shipping_state, shipping_cep, products, tags):
-        self.service = 1
+    def __init__(self, shipping_name, shipping_cpf, shipping_address_1, shipping_complement, shipping_number, shipping_bairro, shipping_city, shipping_state, shipping_cep, products, shipping_price, shipping_type, tags):
+        self.service = ShippingTag.check_for_pac_or_sedex(
+            shipping_state, shipping_price, shipping_type)
         self.agency = 1
         self.de = {
             "name": "Ana Ramos Moda",
@@ -85,7 +86,21 @@ class ShippingTag(MelhorEnvio):
         self.plataform = "Ana Ramos Moda - Moda Feminina"
         self.tags = tags
 
-    def send_to_cart(self):
-        payload = self.to_json().replace('"de":', '"from":')
+    @classmethod
+    def check_for_pac_or_sedex(cls, state, shipping_price, shipping_type):
 
+        if state == 'SP':
+            return 2
+        if shipping_price == '0':
+            return 1
+        if shipping_type == '1':
+            return 1
+        if shipping_type == '2':
+            return 2
+
+        return 1
+
+    def send_to_cart(self):
+
+        payload = self.to_json().replace('"de":', '"from":')
         MelhorEnvio.send_request("cart", payload, "Criar etiqueta no carrinho")

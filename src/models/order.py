@@ -7,13 +7,15 @@ import json
 class Order:
     def __init__(self, form_data) -> None:
         products_codes_from_url = form_data['fields[produtos][value]']
+        preco_frete = form_data['fields[preco_frete][value]']
+        tipo_frete = form_data['fields[tipo_frete][value]']
 
         self.id = ''  # get_order_id
         self.buyer_id = ''  # get_user_id
         self.products = Order.get_products_from_code_str(
             products_codes_from_url)
-        self.shipping_type = 'PAC'
-        self.shipping_price = 0
+        self.shipping_type = tipo_frete
+        self.shipping_price = preco_frete
         self.date_purchase = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
         self.total_value = ''
 
