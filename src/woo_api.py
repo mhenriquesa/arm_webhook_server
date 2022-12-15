@@ -14,7 +14,7 @@ def wooRequests(type_of_req, urlEndPoint, queryParams, data):
     json_response = response.json()
 
     # print(json.dumps(json_response, indent=4))
-    print("Resposta do Woocommerce - Informações de Produto: ", response)
+    print("Resposta do Woocommerce - ", response)
 
     return json_response
 
@@ -27,8 +27,26 @@ def getWooProcessingOrders():
     return json_processing_orders
 
 
-def getProductInfo(id):
-    return wooRequests('GET', f'products/{id}', None, None)
+def getProductInfo(product_id):
+    with open('src/db/products_info.json', 'r') as f:
+        data = json.load(f)
+
+    print("Buscando Informação sobre Produto no DB...")
+    for product in data['products']:
+        if product['id'] == product_id:
+            print("Encontrado no DB")
+            return product
+
+    print("Buscando Informação sobre Produto no Woocommerce...")
+    prod_info = wooRequests('GET', f'products/{product_id}', None, None)
+
+    data['products'].append(prod_info)
+
+    with open('src/db/products_info.json', 'w') as f:
+        json.dump(data, f, indent=2)
+
+    print('Produto encontrado no Woocommerce e adicionado ao DB')
+    return prod_info
 
 
 def createPendingOrder(first_name, last_name, address, number, neighbor, complement, city, state, postcode, email, phone, products, cpf, forma):

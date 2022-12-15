@@ -88,7 +88,6 @@ class ShippingTag(MelhorEnvio):
 
     @classmethod
     def check_for_pac_or_sedex(cls, state, shipping_price, shipping_type):
-
         if state == 'SP':
             return 2
         if shipping_price == '0':
@@ -101,6 +100,5 @@ class ShippingTag(MelhorEnvio):
         return 1
 
     def send_to_cart(self):
-
         payload = self.to_json().replace('"de":', '"from":')
         MelhorEnvio.send_request("cart", payload, "Criar etiqueta no carrinho")

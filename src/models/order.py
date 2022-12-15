@@ -1,26 +1,81 @@
+from src.models.melhor_envio import ShippingTag
+from src.models.trello import TrelloCard
 from src.woo_api import getProductInfo
 from datetime import datetime
-import re
 import json
+import re
 
 
 class Order:
-    def __init__(self, form_data) -> None:
-        products_codes_from_url = form_data['fields[produtos][value]']
-        preco_frete = form_data['fields[preco_frete][value]']
-        tipo_frete = form_data['fields[tipo_frete][value]']
+    def __init__(self, id, client_first_name, client_last_name, cpf, client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list):
+        self.id = id
+        self.client_first_name = client_first_name
+        self.client_last_name = client_last_name
+        self.cpf = cpf
+        self.client_address_1 = client_address_1
+        self.number = number
+        self.complement = complement
+        self.neighbor = neighbor
+        self.city = city
+        self.state = state
+        self.cep = cep
+        self.phone = phone
+        self.shipping_type = shipping_type
+        self.shipping_price = shipping_price
+        self.products_info = products_info
+        self.products_details = {
+            "declaration_info": [],
+            "imgs_urls_list": []
+        }
+        self.total_value = total_value
+        # self.trello_list = trello_list
+        self.trello = {
+            "list_id": trello_list,
+            "urls_attachs": None
+        }
 
-        self.id = ''  # get_order_id
-        self.buyer_id = ''  # get_user_id
-        self.products = Order.get_products_from_code_str(
-            products_codes_from_url)
-        self.shipping_type = tipo_frete
-        self.shipping_price = preco_frete
-        self.date_purchase = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
-        self.total_value = ''
+        phoneOnlyNumbers = re.sub(r'[^0-9]', '', self.phone)
+        self.linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
+        self.date_start = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+
+    def get_trello_card_desc(self):
+        return f'Nome : {self.client_last_name} {self.client_last_name}\nRua/Avenida : {self.client_address_1}\nNúmero: {self.number}\nComplemento: {self.complement}\nBairro: {self.neighbor}\nCidade: {self.city}\nEstado: {self.state}\nCep: {self.cep}\n\n------------------------\n\nCPF: {self.cpf}\nLink para o WhatsApp: \n{self.linkzap}'
+
+    def get_trello_card_name(self):
+        return f"{self.client_first_name} {self.client_last_name}"
 
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__, indent=4)
+
+    def create_trello_card(self):
+        card_name = self.get_trello_card_name()
+        desc = self.get_trello_card_desc()
+        card_labels_ids = None
+        list_id = self.trello['list_id']
+
+        trello_card = TrelloCard(
+            card_name, desc, list_id, card_labels_ids, self.products_info)
+
+        card_info = trello_card.create()
+        return card_info
+
+    def create_shipping_tag(self):
+        shipping_tag = ShippingTag(f"{self.client_first_name} {self.client_last_name} - #{self.id}", self.cpf, self.client_address_1, self.complement, self.number, self.neighbor,
+                                   self.city, self.state, self.cep, self.products_details['declaration_info'], self.shipping_price, self.shipping_type, None)
+        shipping_tag.send_to_cart()
+
+    @classmethod
+    def get_products_data_tag_declaration(cls, products_info):
+        products_data = []
+        for product in products_info:
+            tag_item = {
+                "name": product['name'],
+                "quantity": 1,
+                "unitary_value": product['price']
+            }
+            products_data.append(tag_item)
+
+            return products_data
 
     @classmethod
     def get_products_imgs_urls_list(cls, products_list):
@@ -41,13 +96,107 @@ class Order:
         for code in products_codes_numbers:
             product_info = getProductInfo(code)
 
-            order_products_list.append(
-                {
-                    "id": product_info['id'],
-                    "name": product_info['name'],
-                    "price": product_info['price'],
-                    "img_url": product_info['images'][0]['src']
-                }
-            )
+            # order_products_list.append(
+            #     {
+            #         "id": product_info['id'],
+            #         "name": product_info['name'],
+            #         "price": product_info['price'],
+            #         "img_url": product_info['images'][0]['src']
+            #     }
+            # )
 
         return order_products_list
+
+
+class OrderAddressForm(Order):
+    def __init__(self, form_data):
+        id = None
+        client_first_name = form_data['fields[name_1][value]']
+        client_last_name = form_data['fields[name_2][value]']
+        cpf = form_data['fields[cpf][value]']
+        client_address_1 = form_data['fields[address_1][value]']
+        number = form_data['fields[number][value]']
+        complement = form_data['fields[address_2][value]']
+        neighbor = form_data['fields[neibor][value]']
+        city = form_data['fields[city][value]']
+        state = form_data['fields[state][value]']
+        cep = form_data['fields[cep][value]']
+        phone = form_data['fields[zap][value]']
+        shipping_type = form_data['fields[tipo_frete][value]']
+        shipping_price = form_data['fields[preco_frete][value]']
+        products_info = form_data['fields[produtos][value]']
+        total_value = None
+        trello_list = "6315059660711c0109c21c09"
+
+        super().__init__(id, client_first_name, client_last_name, cpf,
+                         client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list)
+
+    def turn_codes_str_into_int_list(self):
+        products_codes_in_list = re.findall(r"\d{4}", self.products_info)
+        return [int(i) for i in products_codes_in_list]
+
+    def get_products_details(self):
+        if self.products_info == None:
+            print('Não há códigos de roupas para anexar ao cartão!')
+            return None
+
+        codes_int_list = self.turn_codes_str_into_int_list()
+
+        for code in codes_int_list:
+            prodinfo = getProductInfo(code)
+            imgs_src = prodinfo['images'][0]['src']
+            product_name = prodinfo['name']
+            product_price = prodinfo['price']
+
+            info_for_declaration = {
+                "name": product_name,
+                "quantity": 1,
+                "unitary_value": product_price
+            }
+
+            self.products_details['imgs_urls_list'].append(imgs_src)
+            self.products_details['declaration_info'].append(
+                info_for_declaration)
+
+    def create_trello_card(self):
+        card_info = super().create_trello_card()
+        self.get_products_details()
+
+        TrelloCard.set_attachs(
+            card_info['id'], self.products_details['imgs_urls_list'])
+        return
+
+
+class OrderSite(Order):
+    def __init__(self, order_data):
+        id = order_data['id']
+        client_first_name = order_data['shipping']['first_name']
+        client_last_name = order_data['shipping']['last_name']
+        cpf = order_data['billing']['cpf']
+        client_address_1 = order_data['shipping']['address_1']
+        number = order_data['shipping']['number']
+        complement = order_data['shipping']['address_2']
+        neighbor = order_data['shipping']['neighborhood']
+        city = order_data['shipping']['city']
+        state = order_data['shipping']['state']
+        cep = order_data['shipping']['postcode']
+        phone = order_data['billing']['phone']
+        shipping_type = order_data['shipping_lines'][0]['method_id']
+        shipping_price = order_data['shipping_lines'][0]['total']
+        products_info = order_data['line_items']
+        total_value = order_data['total']
+        trello_list = '63191b83a8e4af048326a8b2'
+
+        super().__init__(id, client_first_name, client_last_name, cpf,
+                         client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list)
+
+    def get_products_details(self):
+        print(self.products_info)
+
+    def create_trello_card(self):
+        card_info = super().create_trello_card()
+        self.get_products_details()
+
+        TrelloCard.set_attachs(
+            card_info['id'], self.products_details['imgs_urls_list'])
+        return
