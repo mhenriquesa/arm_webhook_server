@@ -14,4 +14,4 @@ def new_order_site(order_info):
 
     new_order = OrderSite(order_info)
     new_order.create_trello_card()
-    # new_order.create_shipping_tag()
+    new_order.create_shipping_tag()

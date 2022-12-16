@@ -28,11 +28,7 @@ class Order:
             "imgs_urls_list": []
         }
         self.total_value = total_value
-        # self.trello_list = trello_list
-        self.trello = {
-            "list_id": trello_list,
-            "urls_attachs": None
-        }
+        self.trello_list = trello_list
 
         phoneOnlyNumbers = re.sub(r'[^0-9]', '', self.phone)
         self.linkzap = f'https://api.whatsapp.com/send?phone=55{phoneOnlyNumbers}'
@@ -51,7 +47,7 @@ class Order:
         card_name = self.get_trello_card_name()
         desc = self.get_trello_card_desc()
         card_labels_ids = None
-        list_id = self.trello['list_id']
+        list_id = self.trello_list
 
         trello_card = TrelloCard(
             card_name, desc, list_id, card_labels_ids, self.products_info)
@@ -63,49 +59,6 @@ class Order:
         shipping_tag = ShippingTag(f"{self.client_first_name} {self.client_last_name} - #{self.id}", self.cpf, self.client_address_1, self.complement, self.number, self.neighbor,
                                    self.city, self.state, self.cep, self.products_details['declaration_info'], self.shipping_price, self.shipping_type, None)
         shipping_tag.send_to_cart()
-
-    @classmethod
-    def get_products_data_tag_declaration(cls, products_info):
-        products_data = []
-        for product in products_info:
-            tag_item = {
-                "name": product['name'],
-                "quantity": 1,
-                "unitary_value": product['price']
-            }
-            products_data.append(tag_item)
-
-            return products_data
-
-    @classmethod
-    def get_products_imgs_urls_list(cls, products_list):
-        products_imgs_urls_list = []
-
-        for product in products_list:
-            products_imgs_urls_list.append(product['img_url'])
-
-        return products_imgs_urls_list
-
-    @classmethod
-    def get_products_from_code_str(cls, code_in_str):
-        order_products_list = []
-
-        products_codes_in_list = re.findall(r"\d{4}", code_in_str)
-        products_codes_numbers = [int(i) for i in products_codes_in_list]
-
-        for code in products_codes_numbers:
-            product_info = getProductInfo(code)
-
-            # order_products_list.append(
-            #     {
-            #         "id": product_info['id'],
-            #         "name": product_info['name'],
-            #         "price": product_info['price'],
-            #         "img_url": product_info['images'][0]['src']
-            #     }
-            # )
-
-        return order_products_list
 
 
 class OrderAddressForm(Order):
@@ -191,7 +144,27 @@ class OrderSite(Order):
                          client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list)
 
     def get_products_details(self):
-        print(self.products_info)
+        if not self.products_info:
+            print('Não há códigos de roupas para anexar ao cartão!')
+            return None
+
+        for product in self.products_info:
+            img_url = product['image']['src']
+            name = product['name']
+            quantity = product['quantity']
+            price = product['subtotal']
+
+            info_for_declaration = {
+                "name": name,
+                "quantity": quantity,
+                "unitary_value": price
+            }
+
+            self.products_details['imgs_urls_list'].append(img_url)
+            self.products_details['declaration_info'].append(
+                info_for_declaration)
+
+            print(self.products_details)
 
     def create_trello_card(self):
         card_info = super().create_trello_card()
