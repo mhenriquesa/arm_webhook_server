@@ -1,0 +1,4 @@
+2.0.0
+- Melhorado o código usando MVC pattern de forma mais adquada
+- Etiquetas de envio podem distinguir PAC e SEDEX
+- Retirado arquivos do Google
