@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,15 +15,68 @@
         <h3 class="fs-subtitle">
           Por favor, preecha o endereço onde deseja receber seus produtos.
         </h3>
-        <input type="text" name="fields[name_1][value]" placeholder="Primeiro Nome" />
-        <input type="text" name="fields[name_2][value]" placeholder="Sobrenome" />
-        <input type="number" name="fields[cep][value]" placeholder="CEP" />
-        <input type="text" name="fields[address_1][value]" placeholder="Logradouro" />
-        <input type="number" name="fields[number][value]" placeholder="Número" />
-        <input type="text" name="fields[address_2][value]" placeholder="Complemento" />
-        <input type="text" name="fields[neibor][value]" placeholder="Bairro" />
-        <input type="text" name="fields[city][value]" placeholder="Cidade" />
-        <input type="text" name="fields[obsev][value]" placeholder="Observação" />
+        <input
+          placeholder="Primeiro Nome"
+          name="name_1"
+          type="text"
+          pattern="([aA-zZ]+)"
+          title="Apenas letras. Até 20 letras"
+          maxlength="20"
+        />
+        <input
+          placeholder="Sobrenome"
+          name="name_2"
+          type="text"
+          pattern="([aA-zZ]+)"
+          title="Apenas letras. Até 20 letras"
+          maxlength="20"
+        />
+        <input ype="number" name="cep" placeholder="CEP" title="Apenas números" />
+        <input
+          placeholder="Logradouro"
+          name="address_1"
+          type="text"
+          pattern="([aA-zZ]+)"
+          title="Apenas letras. Até 40 letras"
+          maxlength="40"
+        />
+
+        <input
+          placeholder="Número"
+          name="address_number"
+          type="number"
+          title="Apenas números. Até 12 dígitos"
+          maxlength="12"
+        />
+        <input
+          placeholder="Complemento"
+          name="complemento"
+          type="text"
+          title="Até 24 caracteres"
+          maxlength="24"
+        />
+        <input
+          placeholder="Bairro"
+          name="bairro"
+          type="text"
+          title="Até 24 caracteres"
+          maxlength="24"
+        />
+
+        <input
+          placeholder="Cidade"
+          name="cidade"
+          type="text"
+          title="Até 40 caracteres"
+          maxlength="40"
+        />
+        <input
+          placeholder="Observação"
+          name="obs"
+          type="text"
+          title="Até 30 caracteres"
+          maxlength="30"
+        />
         <select name="fields[state][value]" id="">
           <option value="AC">AC</option>
           <option value="AL">AL</option>
@@ -53,13 +106,30 @@
           <option value="SE">SE</option>
           <option value="TO">TO</option>
         </select>
-        <input type="text" name="fields[cpf][value]" placeholder="CPF" />
         <input
+          placeholder="CPF"
+          name="cpf"
           type="text"
-          name="fields[zap][value]"
-          placeholder="WhatsApp (DDD + Telefone)"
+          pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"
+          title="Apenas Números. 11 Dígitos. Inclua os zeros. Ex: 00652158925"
+          maxlength="11"
+          minlength="11"
         />
-        <input type="text" name="phone" placeholder="Email (Código de rastreamento)" />
+        <input
+          placeholder="WhatsApp (DDD + Telefone)"
+          type="number"
+          name="zap"
+          title="Apenas números. Ex: 11982942057"
+          maxlength="11"
+          minlength="10"
+        />
+
+        <input
+          placeholder="Email (Código de rastreamento)"
+          name="email"
+          type="email"
+          title="Formato com @ .com .com.br"
+        />
         <input type="submit" name="enviar" class="submit action-button" value="Enviar" />
       </fieldset>
     </form>
