@@ -57,3 +57,5 @@ class TrelloCard:
             response = requests.request(
                 "POST", url, headers=TrelloCard.headers_request, params=query)
             print('Resposta vindo TrelloCard - Anexo ao Cartão: ', response)
+
+        return

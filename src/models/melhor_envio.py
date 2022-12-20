@@ -101,4 +101,4 @@ class ShippingTag(MelhorEnvio):
 
     def send_to_cart(self):
         payload = self.to_json().replace('"de":', '"from":')
-        MelhorEnvio.send_request("cart", payload, "Criar etiqueta no carrinho")
+        return MelhorEnvio.send_request("cart", payload, "Criar etiqueta no carrinho")

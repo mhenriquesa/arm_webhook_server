@@ -44,6 +44,7 @@ body {
 }
 /*inputs*/
 #msform input,
+#msform select,
 #msform textarea {
   padding: 15px;
   border: 1px solid #ccc;
@@ -52,7 +53,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   font-family: montserrat;
-  color: #bca37d;
+  color: #333;
   font-size: 13px;
 }
 /*buttons*/

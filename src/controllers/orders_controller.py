@@ -6,6 +6,7 @@ def address_form(form_data):
     address_form = OrderAddressForm(form_data)
     address_form.create_trello_card()
     address_form.create_shipping_tag()
+    return
 
 
 def new_order_site(order_info):

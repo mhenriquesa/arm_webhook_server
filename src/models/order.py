@@ -56,9 +56,11 @@ class Order:
         return card_info
 
     def create_shipping_tag(self):
-        shipping_tag = ShippingTag(f"{self.client_first_name} {self.client_last_name} - #{self.id}", self.cpf, self.client_address_1, self.complement, self.number, self.neighbor,
+        shipping_tag = ShippingTag(f"{self.client_first_name} {self.client_last_name}", self.cpf, self.client_address_1, self.complement, self.number, self.neighbor,
                                    self.city, self.state, self.cep, self.products_details['declaration_info'], self.shipping_price, self.shipping_type, None)
+        print(shipping_tag.to_json())
         shipping_tag.send_to_cart()
+        return
 
 
 class OrderAddressForm(Order):
@@ -115,9 +117,8 @@ class OrderAddressForm(Order):
         card_info = super().create_trello_card()
         self.get_products_details()
 
-        TrelloCard.set_attachs(
+        return TrelloCard.set_attachs(
             card_info['id'], self.products_details['imgs_urls_list'])
-        return
 
 
 class OrderSite(Order):
