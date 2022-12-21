@@ -11,7 +11,7 @@ def show_home():
     return views_controller.home()
 
 
-@main.route('/order-form', methods=['GET'])
+@main.route('/formulario-de-pedido', methods=['GET'])
 def order_form_page():
     return views_controller.order_form()
 

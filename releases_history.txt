@@ -2,3 +2,10 @@
 - Melhorado o código usando MVC pattern de forma mais adquada
 - Etiquetas de envio podem distinguir PAC e SEDEX
 - Retirado arquivos do Google
+
+2.0.1
+- Criado HTML para formulário de endereço
+- Autocomplete usando informações ViaCEP e parametros de URL
+
+2.0.2
+- Alteração de endpoint para o formulário de endereço (de order-form para formulario-de-pedido)
