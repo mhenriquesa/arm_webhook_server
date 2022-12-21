@@ -1,5 +1,4 @@
 from flask import render_template, make_response
-from flask.wrappers import Response
 
 
 def home():

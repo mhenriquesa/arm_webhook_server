@@ -16,6 +16,11 @@ def order_form_page():
     return views_controller.order_form()
 
 
+@main.route('/criar-link-formulario', methods=['GET'])
+def create_form_link():
+    return views_controller.order_form()
+
+
 @main.route('/address-form', methods=['POST'])
 def address_form():
     data = {
