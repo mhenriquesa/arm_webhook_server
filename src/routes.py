@@ -19,9 +19,7 @@ def order_form_page():
 @main.route('/address-form', methods=['POST'])
 def address_form():
     data = request.form.to_dict()
-    orders_controller.address_form(data)
-
-    return Response(status=200)
+    return orders_controller.address_form(data)
 
 
 @main.route('/new_order', methods=['POST'])

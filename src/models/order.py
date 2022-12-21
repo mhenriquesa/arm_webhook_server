@@ -7,8 +7,7 @@ import re
 
 
 class Order:
-    def __init__(self, id, client_first_name, client_last_name, cpf, client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list):
-        self.id = id
+    def __init__(self, client_first_name, client_last_name, cpf, client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, forma_pgto, trello_list):
         self.client_first_name = client_first_name
         self.client_last_name = client_last_name
         self.cpf = cpf
@@ -28,6 +27,7 @@ class Order:
             "imgs_urls_list": []
         }
         self.total_value = total_value
+        self.forma_pgto = forma_pgto
         self.trello_list = trello_list
 
         phoneOnlyNumbers = re.sub(r'[^0-9]', '', self.phone)
@@ -65,26 +65,27 @@ class Order:
 
 class OrderAddressForm(Order):
     def __init__(self, form_data):
-        id = None
-        client_first_name = form_data['fields[name_1][value]']
-        client_last_name = form_data['fields[name_2][value]']
-        cpf = form_data['fields[cpf][value]']
-        client_address_1 = form_data['fields[address_1][value]']
-        number = form_data['fields[number][value]']
-        complement = form_data['fields[address_2][value]']
-        neighbor = form_data['fields[neibor][value]']
-        city = form_data['fields[city][value]']
-        state = form_data['fields[state][value]']
-        cep = form_data['fields[cep][value]']
-        phone = form_data['fields[zap][value]']
-        shipping_type = form_data['fields[tipo_frete][value]']
-        shipping_price = form_data['fields[preco_frete][value]']
-        products_info = form_data['fields[produtos][value]']
+        client_first_name = form_data['name_1']
+        client_last_name = form_data['name_2']
+        cpf = form_data['cpf']
+        client_address_1 = form_data['address_1']
+        number = form_data['address_number']
+        complement = form_data['complemento']
+        neighbor = form_data['bairro']
+        city = form_data['cidade']
+        state = form_data['estado']
+        cep = form_data['cep']
+        phone = form_data['zap']
+        shipping_type = form_data['tipo_frete']
+        shipping_price = form_data['preco_frete']
+        products_info = form_data['produtos']
+        forma_pgto = form_data['forma_pgto']
         total_value = None
         trello_list = "6315059660711c0109c21c09"
 
-        super().__init__(id, client_first_name, client_last_name, cpf,
-                         client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list)
+        super().__init__(client_first_name, client_last_name, cpf,
+                         client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, forma_pgto, trello_list)
+        self.id = None
 
     def turn_codes_str_into_int_list(self):
         products_codes_in_list = re.findall(r"\d{4}", self.products_info)
@@ -123,7 +124,6 @@ class OrderAddressForm(Order):
 
 class OrderSite(Order):
     def __init__(self, order_data):
-        id = order_data['id']
         client_first_name = order_data['shipping']['first_name']
         client_last_name = order_data['shipping']['last_name']
         cpf = order_data['billing']['cpf']
@@ -143,6 +143,8 @@ class OrderSite(Order):
 
         super().__init__(id, client_first_name, client_last_name, cpf,
                          client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list)
+
+        self.id = order_data['id']
 
     def get_products_details(self):
         if not self.products_info:

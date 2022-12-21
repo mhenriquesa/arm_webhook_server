@@ -19,41 +19,49 @@
           placeholder="Primeiro Nome"
           name="name_1"
           type="text"
-          pattern="([aA-zZ]+)"
+          pattern="([aA-zZáéíóúÁÉÍÓÚ 0-9]+)"
           title="Apenas letras. Até 20 letras"
           maxlength="20"
+          required
         />
         <input
           placeholder="Sobrenome"
           name="name_2"
           type="text"
-          pattern="([aA-zZ]+)"
+          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
           title="Apenas letras. Até 20 letras"
           maxlength="20"
+          required
         />
-        <input ype="number" name="cep" placeholder="CEP" title="Apenas números" />
+        <input
+          type="number"
+          name="cep"
+          placeholder="CEP"
+          title="Apenas números. Inclua os zeros. Ex: 09172180"
+          maxlength="8"
+          minlength="8"
+          id="cep"
+          required
+        />
         <input
           placeholder="Logradouro"
           name="address_1"
           type="text"
-          pattern="([aA-zZ]+)"
+          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
           title="Apenas letras. Até 40 letras"
           maxlength="40"
+          id="address_1"
+          required
         />
 
         <input
           placeholder="Número"
           name="address_number"
-          type="number"
-          title="Apenas números. Até 12 dígitos"
-          maxlength="12"
-        />
-        <input
-          placeholder="Complemento"
-          name="complemento"
           type="text"
-          title="Até 24 caracteres"
-          maxlength="24"
+          title="Apenas letras e números. Até 12 dígitos"
+          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
+          maxlength="12"
+          required
         />
         <input
           placeholder="Bairro"
@@ -61,6 +69,9 @@
           type="text"
           title="Até 24 caracteres"
           maxlength="24"
+          required
+          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
+          id="bairro"
         />
 
         <input
@@ -69,15 +80,27 @@
           type="text"
           title="Até 40 caracteres"
           maxlength="40"
+          required
+          id="cidade"
+          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
         />
         <input
-          placeholder="Observação"
+          placeholder="Bloco / Ap / Casa"
+          name="complemento"
+          type="text"
+          title="Até 24 caracteres"
+          maxlength="24"
+          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
+        />
+        <input
+          placeholder="Informações adicionais"
           name="obs"
           type="text"
           title="Até 30 caracteres"
           maxlength="30"
+          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
         />
-        <select name="fields[state][value]" id="">
+        <select name="estado" id="estado" required>
           <option value="AC">AC</option>
           <option value="AL">AL</option>
           <option value="AP">AP</option>
@@ -107,13 +130,14 @@
           <option value="TO">TO</option>
         </select>
         <input
-          placeholder="CPF"
+          placeholder="CPF para os Correios"
           name="cpf"
           type="text"
           pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"
           title="Apenas Números. 11 Dígitos. Inclua os zeros. Ex: 00652158925"
           maxlength="11"
           minlength="11"
+          required
         />
         <input
           placeholder="WhatsApp (DDD + Telefone)"
@@ -122,6 +146,7 @@
           title="Apenas números. Ex: 11982942057"
           maxlength="11"
           minlength="10"
+          required
         />
 
         <input
@@ -130,8 +155,26 @@
           type="email"
           title="Formato com @ .com .com.br"
         />
+        <input placeholder="Produtos" name="produtos" type="hidden" id="produtos" />
+        <input placeholder="Tipo frete" name="tipo_frete" type="hidden" id="tipo_frete" />
+        <input placeholder="Forma pgto" name="forma_pgto" type="hidden" id="forma_pgto" />
+        <input
+          placeholder="Preco frete"
+          name="preco_frete"
+          type="hidden"
+          id="preco_frete"
+        />
         <input type="submit" name="enviar" class="submit action-button" value="Enviar" />
+        <h3 class="fs-subtitle">
+          Após enviar, por favor aguarde alguns segundo para receber a confirmação
+        </h3>
       </fieldset>
     </form>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="{{ url_for('static' , filename='js/form_autocomplete.js')}}"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 from src.models.order import OrderSite, OrderAddressForm
+from flask import render_template, make_response
 from src.utils.variables import ORDER_SAMPLE
 
 
@@ -6,7 +7,7 @@ def address_form(form_data):
     address_form = OrderAddressForm(form_data)
     address_form.create_trello_card()
     address_form.create_shipping_tag()
-    return
+    return make_response(render_template("order-form_confirmation.html"), 200)
 
 
 def new_order_site(order_info):
