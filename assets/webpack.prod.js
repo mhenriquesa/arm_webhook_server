@@ -14,7 +14,7 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'ARM Websystem',
-      filename: 'templatess/home.html',
+      filename: path.resolve(__dirname, '..', 'src', 'templates', 'home.html'),
       template: path.resolve(__dirname, '..', 'src', 'templates', 'home.html'),
       minify: {
         removeAttributeQuotes: true,
@@ -26,7 +26,6 @@ module.exports = merge(common, {
   output: {
     filename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, '..', 'src', 'static'),
-    // assetModuleFilename: 'images/[hash][ext][query]'
     assetModuleFilename: 'images/[hash].[ext]',
     publicPath: '/static',
   },
