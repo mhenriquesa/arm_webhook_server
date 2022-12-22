@@ -1,14 +1,18 @@
-2.0.0
-- Melhorado o código usando MVC pattern de forma mais adquada
-- Etiquetas de envio podem distinguir PAC e SEDEX
-- Retirado arquivos do Google
+2.1.1
+- Resolvido problemas com Env Variables
+- Colocado campos produtos, tipo frete, preco frete, forma de pagamento como opcionais
+
+2.1.0
+- Adicionado estrutura de webpack para frontend
+
+2.0.2
+- Alteração de endpoint para o formulário de endereço (de order-form para formulario-de-pedido)
 
 2.0.1
 - Criado HTML para formulário de endereço
 - Autocomplete usando informações ViaCEP e parametros de URL
 
-2.0.2
-- Alteração de endpoint para o formulário de endereço (de order-form para formulario-de-pedido)
-
-2.1.0
-- Adicionado estrutura de webpack para frontend
+2.0.0
+- Melhorado o código usando MVC pattern de forma mais adquada
+- Etiquetas de envio podem distinguir PAC e SEDEX
+- Retirado arquivos do Google
