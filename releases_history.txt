@@ -9,3 +9,6 @@
 
 2.0.2
 - Alteração de endpoint para o formulário de endereço (de order-form para formulario-de-pedido)
+
+2.1.0
+- Adicionado estrutura de webpack para frontend
