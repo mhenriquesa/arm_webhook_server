@@ -25,7 +25,7 @@
       "date_on_sale_to_gmt": null,
       "on_sale": true,
       "purchasable": true,
-      "total_sales": 16,
+      "total_sales": 17,
       "virtual": false,
       "downloadable": false,
       "downloads": [],
@@ -108,10 +108,10 @@
       "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>197,00</bdi></span></del> <ins><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>179,00</bdi></span></ins>",
       "related_ids": [
         4138,
-        4304,
-        4458,
-        4453,
-        3451
+        4009,
+        4342,
+        4339,
+        3341
       ],
       "meta_data": [
         {
@@ -195,7 +195,7 @@
         {
           "id": 41992,
           "key": "woolentor_views_count_product",
-          "value": "387"
+          "value": "419"
         }
       ],
       "stock_status": "instock",
@@ -320,11 +320,11 @@
       "menu_order": 0,
       "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>197,00</bdi></span></del> <ins><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>179,00</bdi></span></ins>",
       "related_ids": [
-        3923,
-        3341,
+        4027,
+        3348,
         3750,
-        3670,
-        4169
+        3998,
+        3454
       ],
       "meta_data": [
         {
@@ -633,7 +633,7 @@
         {
           "id": 37385,
           "key": "woolentor_views_count_product",
-          "value": "1593"
+          "value": "1712"
         }
       ],
       "stock_status": "instock",
@@ -647,282 +647,6 @@
         "collection": [
           {
             "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products"
-          }
-        ]
-      }
-    },
-    {
-      "id": 4001,
-      "name": "Cal\u00e7a Legging Max Therm - M",
-      "slug": "calca-legging-max-therm-m",
-      "permalink": "https://anaramosmoda.com.br/produto/calcas/leggings/calca-legging-max-therm/?attribute_tamanho=M",
-      "date_created": "2022-09-07T20:45:49",
-      "date_created_gmt": "2022-09-07T23:45:49",
-      "date_modified": "2022-09-07T20:48:43",
-      "date_modified_gmt": "2022-09-07T23:48:43",
-      "type": "variation",
-      "status": "publish",
-      "featured": false,
-      "catalog_visibility": "visible",
-      "description": "<p>Veste 40</p>\n",
-      "short_description": "",
-      "sku": "max-therm-m",
-      "price": "179",
-      "regular_price": "179",
-      "sale_price": "",
-      "date_on_sale_from": null,
-      "date_on_sale_from_gmt": null,
-      "date_on_sale_to": null,
-      "date_on_sale_to_gmt": null,
-      "on_sale": false,
-      "purchasable": true,
-      "total_sales": "0",
-      "virtual": false,
-      "downloadable": false,
-      "downloads": [],
-      "download_limit": -1,
-      "download_expiry": -1,
-      "external_url": "",
-      "button_text": "",
-      "tax_status": "taxable",
-      "tax_class": "",
-      "manage_stock": false,
-      "stock_quantity": null,
-      "backorders": "no",
-      "backorders_allowed": false,
-      "backordered": false,
-      "low_stock_amount": null,
-      "sold_individually": false,
-      "weight": "0.2",
-      "dimensions": {
-        "length": "5",
-        "width": "10",
-        "height": "10"
-      },
-      "shipping_required": true,
-      "shipping_taxable": true,
-      "shipping_class": "",
-      "shipping_class_id": 0,
-      "reviews_allowed": false,
-      "average_rating": "0.00",
-      "rating_count": 0,
-      "upsell_ids": [],
-      "cross_sell_ids": [],
-      "parent_id": 3999,
-      "purchase_note": "",
-      "categories": [],
-      "tags": [],
-      "images": [
-        {
-          "id": 3997,
-          "date_created": "2022-09-07T17:40:27",
-          "date_created_gmt": "2022-09-07T23:40:27",
-          "date_modified": "2022-09-07T17:40:27",
-          "date_modified_gmt": "2022-09-07T23:40:27",
-          "src": "https://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662594022929.png",
-          "name": "wp-1662594022929.png",
-          "alt": ""
-        }
-      ],
-      "attributes": [
-        {
-          "id": 0,
-          "name": "Tamanho",
-          "option": "M"
-        }
-      ],
-      "default_attributes": [],
-      "variations": [],
-      "grouped_products": [],
-      "menu_order": 2,
-      "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>179,00</bdi></span>",
-      "related_ids": [],
-      "meta_data": [
-        {
-          "id": 50166,
-          "key": "_wc_facebook_sync_enabled",
-          "value": "yes"
-        },
-        {
-          "id": 50167,
-          "key": "fb_visibility",
-          "value": "yes"
-        },
-        {
-          "id": 50168,
-          "key": "fb_product_description",
-          "value": ""
-        },
-        {
-          "id": 50169,
-          "key": "_wc_facebook_product_image_source",
-          "value": "parent_product"
-        },
-        {
-          "id": 50170,
-          "key": "fb_product_image",
-          "value": ""
-        },
-        {
-          "id": 50171,
-          "key": "fb_product_price",
-          "value": ""
-        }
-      ],
-      "stock_status": "instock",
-      "has_options": false,
-      "_links": {
-        "self": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/4001"
-          }
-        ],
-        "collection": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products"
-          }
-        ],
-        "up": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/3999"
-          }
-        ]
-      }
-    },
-    {
-      "id": 4002,
-      "name": "Cal\u00e7a Legging Max Therm - G",
-      "slug": "calca-legging-max-therm-g",
-      "permalink": "https://anaramosmoda.com.br/produto/calcas/leggings/calca-legging-max-therm/?attribute_tamanho=G",
-      "date_created": "2022-09-07T20:45:49",
-      "date_created_gmt": "2022-09-07T23:45:49",
-      "date_modified": "2022-09-07T20:48:43",
-      "date_modified_gmt": "2022-09-07T23:48:43",
-      "type": "variation",
-      "status": "publish",
-      "featured": false,
-      "catalog_visibility": "visible",
-      "description": "<p>Veste 42</p>\n",
-      "short_description": "",
-      "sku": "max-therm-g",
-      "price": "179",
-      "regular_price": "179",
-      "sale_price": "",
-      "date_on_sale_from": null,
-      "date_on_sale_from_gmt": null,
-      "date_on_sale_to": null,
-      "date_on_sale_to_gmt": null,
-      "on_sale": false,
-      "purchasable": true,
-      "total_sales": "0",
-      "virtual": false,
-      "downloadable": false,
-      "downloads": [],
-      "download_limit": -1,
-      "download_expiry": -1,
-      "external_url": "",
-      "button_text": "",
-      "tax_status": "taxable",
-      "tax_class": "",
-      "manage_stock": false,
-      "stock_quantity": null,
-      "backorders": "no",
-      "backorders_allowed": false,
-      "backordered": false,
-      "low_stock_amount": null,
-      "sold_individually": false,
-      "weight": "0.2",
-      "dimensions": {
-        "length": "5",
-        "width": "10",
-        "height": "10"
-      },
-      "shipping_required": true,
-      "shipping_taxable": true,
-      "shipping_class": "",
-      "shipping_class_id": 0,
-      "reviews_allowed": false,
-      "average_rating": "0.00",
-      "rating_count": 0,
-      "upsell_ids": [],
-      "cross_sell_ids": [],
-      "parent_id": 3999,
-      "purchase_note": "",
-      "categories": [],
-      "tags": [],
-      "images": [
-        {
-          "id": 3997,
-          "date_created": "2022-09-07T17:40:27",
-          "date_created_gmt": "2022-09-07T23:40:27",
-          "date_modified": "2022-09-07T17:40:27",
-          "date_modified_gmt": "2022-09-07T23:40:27",
-          "src": "https://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662594022929.png",
-          "name": "wp-1662594022929.png",
-          "alt": ""
-        }
-      ],
-      "attributes": [
-        {
-          "id": 0,
-          "name": "Tamanho",
-          "option": "G"
-        }
-      ],
-      "default_attributes": [],
-      "variations": [],
-      "grouped_products": [],
-      "menu_order": 3,
-      "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>179,00</bdi></span>",
-      "related_ids": [],
-      "meta_data": [
-        {
-          "id": 50173,
-          "key": "_wc_facebook_sync_enabled",
-          "value": "yes"
-        },
-        {
-          "id": 50174,
-          "key": "fb_visibility",
-          "value": "yes"
-        },
-        {
-          "id": 50175,
-          "key": "fb_product_description",
-          "value": ""
-        },
-        {
-          "id": 50176,
-          "key": "_wc_facebook_product_image_source",
-          "value": "parent_product"
-        },
-        {
-          "id": 50177,
-          "key": "fb_product_image",
-          "value": ""
-        },
-        {
-          "id": 50178,
-          "key": "fb_product_price",
-          "value": ""
-        }
-      ],
-      "stock_status": "instock",
-      "has_options": false,
-      "_links": {
-        "self": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/4002"
-          }
-        ],
-        "collection": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products"
-          }
-        ],
-        "up": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/3999"
           }
         ]
       }

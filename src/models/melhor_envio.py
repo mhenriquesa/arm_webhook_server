@@ -22,7 +22,6 @@ class MelhorEnvio:
 
         print(
             f"Resposta do Melhor envio para requisição - {description_req}: ", response)
-        print(response.text)
 
         return response.json()
 

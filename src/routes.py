@@ -18,7 +18,14 @@ def order_form_page():
 
 @main.route('/address-form', methods=['POST'])
 def address_form():
-    data = request.form.to_dict()
+    data = {
+        "forma_pgto": request.form.get('forma_pgto'),
+        "produtos": request.form.get('produtos'),
+        "tipo_frete": request.form.get('tipo_frete'),
+        "preco_frete": request.form.get('preco_frete'),
+        "info": request.form.to_dict()
+    }
+
     return orders_controller.address_form(data)
 
 

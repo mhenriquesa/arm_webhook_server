@@ -3,7 +3,8 @@ import os
 import json
 
 auth_token = os.environ.get('WOOCOMMERCE_AUTH_TOKEN')
-headers = {'Authorization': f'Bearer {auth_token}',
+print(auth_token)
+headers = {'Authorization': auth_token,
            'Content-type': 'application/json'}
 mainUrl = 'https://anaramosmoda.com.br/wp-json/wc/v3/'
 
@@ -14,6 +15,7 @@ def wooRequests(type_of_req, urlEndPoint, queryParams, data):
     json_response = response.json()
 
     print("Resposta do Woocommerce - ", response)
+    print("Resposta do Woocommerce - ", response.text)
 
     return json_response
 

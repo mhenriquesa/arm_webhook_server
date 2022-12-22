@@ -35,7 +35,7 @@ class Order:
         self.date_start = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
 
     def get_trello_card_desc(self):
-        return f'Nome : {self.client_last_name} {self.client_last_name}\nRua/Avenida : {self.client_address_1}\nNúmero: {self.number}\nComplemento: {self.complement}\nBairro: {self.neighbor}\nCidade: {self.city}\nEstado: {self.state}\nCep: {self.cep}\n\n------------------------\n\nCPF: {self.cpf}\nLink para o WhatsApp: \n{self.linkzap}'
+        return f'Nome : {self.client_first_name} {self.client_last_name}\nRua/Avenida : {self.client_address_1}\nNúmero: {self.number}\nComplemento: {self.complement}\nBairro: {self.neighbor}\nCidade: {self.city}\nEstado: {self.state}\nCep: {self.cep}\n\n------------------------\n\nCPF: {self.cpf}\nLink para o WhatsApp: \n{self.linkzap}'
 
     def get_trello_card_name(self):
         return f"{self.client_first_name} {self.client_last_name}"
@@ -58,24 +58,23 @@ class Order:
     def create_shipping_tag(self):
         shipping_tag = ShippingTag(f"{self.client_first_name} {self.client_last_name}", self.cpf, self.client_address_1, self.complement, self.number, self.neighbor,
                                    self.city, self.state, self.cep, self.products_details['declaration_info'], self.shipping_price, self.shipping_type, None)
-        print(shipping_tag.to_json())
         shipping_tag.send_to_cart()
         return
 
 
 class OrderAddressForm(Order):
     def __init__(self, form_data):
-        client_first_name = form_data['name_1']
-        client_last_name = form_data['name_2']
-        cpf = form_data['cpf']
-        client_address_1 = form_data['address_1']
-        number = form_data['address_number']
-        complement = form_data['complemento']
-        neighbor = form_data['bairro']
-        city = form_data['cidade']
-        state = form_data['estado']
-        cep = form_data['cep']
-        phone = form_data['zap']
+        client_first_name = form_data['info']['name_1']
+        client_last_name = form_data['info']['name_2']
+        cpf = form_data['info']['cpf']
+        client_address_1 = form_data['info']['address_1']
+        number = form_data['info']['address_number']
+        complement = form_data['info']['complemento']
+        neighbor = form_data['info']['bairro']
+        city = form_data['info']['cidade']
+        state = form_data['info']['estado']
+        cep = form_data['info']['cep']
+        phone = form_data['info']['zap']
         shipping_type = form_data['tipo_frete']
         shipping_price = form_data['preco_frete']
         products_info = form_data['produtos']
