@@ -1,3 +1,8 @@
+2.2.0
+- Implementado página para criar links de formulários de pedidos. 
+- Os links enviados conterão informações sobre o pedido da cliente
+- Error Handling para erros nos códigos de produtos
+
 2.1.1
 - Resolvido problemas com Env Variables
 - Colocado campos produtos, tipo frete, preco frete, forma de pagamento como opcionais

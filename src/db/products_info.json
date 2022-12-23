@@ -1,31 +1,31 @@
 {
   "products": [
     {
-      "id": 4001,
-      "name": "Cal\u00e7a Legging Max Therm - M",
-      "slug": "calca-legging-max-therm-m",
-      "permalink": "https://anaramosmoda.com.br/produto/calcas/leggings/calca-legging-max-therm/?attribute_tamanho=M",
-      "date_created": "2022-09-07T20:45:49",
-      "date_created_gmt": "2022-09-07T23:45:49",
-      "date_modified": "2022-09-07T20:48:43",
-      "date_modified_gmt": "2022-09-07T23:48:43",
-      "type": "variation",
+      "id": 3669,
+      "name": "Conjunto Pantalonas e Cropped Folhas de Outono Rosa",
+      "slug": "conjunto-pantalonas-e-cropped-folhas-de-outono-rosa",
+      "permalink": "https://anaramosmoda.com.br/produto/conjuntos/calca-cropped/conjunto-pantalonas-e-cropped-folhas-de-outono-rosa/",
+      "date_created": "2022-08-20T10:36:08",
+      "date_created_gmt": "2022-08-20T13:36:08",
+      "date_modified": "2022-08-20T10:36:09",
+      "date_modified_gmt": "2022-08-20T13:36:09",
+      "type": "simple",
       "status": "publish",
       "featured": false,
       "catalog_visibility": "visible",
-      "description": "<p>Veste 40</p>\n",
-      "short_description": "",
-      "sku": "max-therm-m",
+      "description": "",
+      "short_description": "<p>\u2705 Tecido Viscolinho Alfaiataria 1\u00aa linha</p>\n<p>\u2705 Todo Forrado: N\u00e3o fica transparente</p>\n<p>\u2705 El\u00e1sticos na cintura e no cropped. Super confort\u00e1vel</p>\n<p>\u2705 Bojo</p>\n<p>\u2705 Confort\u00e1vel para trabalhar. N\u00e3o aperta</p>\n<p>\u2728 Outras cores dispon\u00edveis</p>\n<p>\u26a0\ufe0f Tamanho \u00fanico \u26a0\ufe0f<br />\nveste do 38 ao 42</p>\n<p>==================<br />\n\u2728Condi\u00e7\u00e3o especial de 2\u00ba Lote<br />\n==================</p>\n<p>\ud83d\udcb3 Parcelamos em at\u00e9 12x</p>\n",
+      "sku": "",
       "price": "179",
-      "regular_price": "179",
-      "sale_price": "",
+      "regular_price": "197",
+      "sale_price": "179",
       "date_on_sale_from": null,
       "date_on_sale_from_gmt": null,
       "date_on_sale_to": null,
       "date_on_sale_to_gmt": null,
-      "on_sale": false,
+      "on_sale": true,
       "purchasable": true,
-      "total_sales": "0",
+      "total_sales": 17,
       "virtual": false,
       "downloadable": false,
       "downloads": [],
@@ -57,65 +57,145 @@
       "rating_count": 0,
       "upsell_ids": [],
       "cross_sell_ids": [],
-      "parent_id": 3999,
+      "parent_id": 0,
       "purchase_note": "",
-      "categories": [],
-      "tags": [],
+      "categories": [
+        {
+          "id": 46,
+          "name": "Conjuntos",
+          "slug": "conjuntos"
+        },
+        {
+          "id": 47,
+          "name": "Cal\u00e7a e Cropped",
+          "slug": "calca-cropped"
+        }
+      ],
+      "tags": [
+        {
+          "id": 72,
+          "name": "Conjuntos",
+          "slug": "conjuntos"
+        },
+        {
+          "id": 80,
+          "name": "Cropped",
+          "slug": "cropped"
+        },
+        {
+          "id": 75,
+          "name": "Pantalonas",
+          "slug": "pantalonas"
+        }
+      ],
       "images": [
         {
-          "id": 3997,
-          "date_created": "2022-09-07T17:40:27",
-          "date_created_gmt": "2022-09-07T23:40:27",
-          "date_modified": "2022-09-07T17:40:27",
-          "date_modified_gmt": "2022-09-07T23:40:27",
-          "src": "https://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662594022929.png",
-          "name": "wp-1662594022929.png",
+          "id": 2348,
+          "date_created": "2022-04-16T20:55:11",
+          "date_created_gmt": "2022-04-17T02:55:11",
+          "date_modified": "2022-04-16T20:55:11",
+          "date_modified_gmt": "2022-04-17T02:55:11",
+          "src": "https://anaramosmoda.com.br/wp-content/uploads/2022/04/InShot_20220416_235210835.jpg",
+          "name": "InShot_20220416_235210835",
           "alt": ""
         }
       ],
-      "attributes": [
-        {
-          "id": 0,
-          "name": "Tamanho",
-          "option": "M"
-        }
-      ],
+      "attributes": [],
       "default_attributes": [],
       "variations": [],
       "grouped_products": [],
-      "menu_order": 2,
-      "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>179,00</bdi></span>",
-      "related_ids": [],
+      "menu_order": 0,
+      "price_html": "<del aria-hidden=\"true\"><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>197,00</bdi></span></del> <ins><span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>179,00</bdi></span></ins>",
+      "related_ids": [
+        4342,
+        3921,
+        3454,
+        4062,
+        4169
+      ],
       "meta_data": [
         {
-          "id": 50166,
+          "id": 41952,
+          "key": "_last_editor_used_jetpack",
+          "value": "classic-editor"
+        },
+        {
+          "id": 41956,
+          "key": "_selectproduct_layout",
+          "value": ""
+        },
+        {
+          "id": 41957,
+          "key": "woolentor_cart_custom_content",
+          "value": ""
+        },
+        {
+          "id": 41958,
+          "key": "woolentor_total_stock_quantity",
+          "value": ""
+        },
+        {
+          "id": 41959,
+          "key": "_saleflash_text",
+          "value": ""
+        },
+        {
+          "id": 41960,
+          "key": "cartflows_redirect_flow_id",
+          "value": ""
+        },
+        {
+          "id": 41961,
+          "key": "cartflows_add_to_cart_text",
+          "value": ""
+        },
+        {
+          "id": 41984,
           "key": "_wc_facebook_sync_enabled",
           "value": "yes"
         },
         {
-          "id": 50167,
+          "id": 41985,
           "key": "fb_visibility",
           "value": "yes"
         },
         {
-          "id": 50168,
+          "id": 41986,
           "key": "fb_product_description",
           "value": ""
         },
         {
-          "id": 50169,
+          "id": 41987,
           "key": "_wc_facebook_product_image_source",
-          "value": "parent_product"
+          "value": "product"
         },
         {
-          "id": 50170,
-          "key": "fb_product_image",
-          "value": ""
+          "id": 41988,
+          "key": "_wc_facebook_commerce_enabled",
+          "value": "no"
         },
         {
-          "id": 50171,
-          "key": "fb_product_price",
-          "value": ""
+          "id": 41989,
+          "key": "fb_product_group_id",
+          "value": "6053888754627662"
+        },
+        {
+          "id": 41990,
+          "key": "fb_product_item_id",
+          "value": "6053888804627657"
+        },
+        {
+          "id": 41991,
+          "key": "fswp_post_meta",
+          "value": {
+            "disable_in_cash": "0",
+            "disable_installments": "0"
+          }
+        },
+        {
+          "id": 41992,
+          "key": "woolentor_views_count_product",
+          "value": "421"
         }
       ],
       "stock_status": "instock",
@@ -123,164 +203,14 @@
       "_links": {
         "self": [
           {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/4001"
+            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/3669"
           }
         ],
         "collection": [
           {
             "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products"
           }
-        ],
-        "up": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/3999"
-          }
         ]
-      }
-    },
-    {
-      "id": 4003,
-      "name": "Cal\u00e7a Legging Max Therm - GG",
-      "slug": "calca-legging-max-therm-gg",
-      "permalink": "https://anaramosmoda.com.br/produto/calcas/leggings/calca-legging-max-therm/?attribute_tamanho=GG",
-      "date_created": "2022-09-07T20:45:49",
-      "date_created_gmt": "2022-09-07T23:45:49",
-      "date_modified": "2022-09-07T20:48:43",
-      "date_modified_gmt": "2022-09-07T23:48:43",
-      "type": "variation",
-      "status": "publish",
-      "featured": false,
-      "catalog_visibility": "visible",
-      "description": "<p>Veste 44 46</p>\n",
-      "short_description": "",
-      "sku": "mx-therm-g",
-      "price": "179",
-      "regular_price": "179",
-      "sale_price": "",
-      "date_on_sale_from": null,
-      "date_on_sale_from_gmt": null,
-      "date_on_sale_to": null,
-      "date_on_sale_to_gmt": null,
-      "on_sale": false,
-      "purchasable": true,
-      "total_sales": "0",
-      "virtual": false,
-      "downloadable": false,
-      "downloads": [],
-      "download_limit": -1,
-      "download_expiry": -1,
-      "external_url": "",
-      "button_text": "",
-      "tax_status": "taxable",
-      "tax_class": "",
-      "manage_stock": false,
-      "stock_quantity": null,
-      "backorders": "no",
-      "backorders_allowed": false,
-      "backordered": false,
-      "low_stock_amount": null,
-      "sold_individually": false,
-      "weight": "0.2",
-      "dimensions": {
-        "length": "5",
-        "width": "10",
-        "height": "10"
-      },
-      "shipping_required": true,
-      "shipping_taxable": true,
-      "shipping_class": "",
-      "shipping_class_id": 0,
-      "reviews_allowed": false,
-      "average_rating": "0.00",
-      "rating_count": 0,
-      "upsell_ids": [],
-      "cross_sell_ids": [],
-      "parent_id": 3999,
-      "purchase_note": "",
-      "categories": [],
-      "tags": [],
-      "images": [
-        {
-          "id": 3997,
-          "date_created": "2022-09-07T17:40:27",
-          "date_created_gmt": "2022-09-07T23:40:27",
-          "date_modified": "2022-09-07T17:40:27",
-          "date_modified_gmt": "2022-09-07T23:40:27",
-          "src": "https://anaramosmoda.com.br/wp-content/uploads/2022/09/wp-1662594022929.png",
-          "name": "wp-1662594022929.png",
-          "alt": ""
-        }
-      ],
-      "attributes": [
-        {
-          "id": 0,
-          "name": "Tamanho",
-          "option": "GG"
-        }
-      ],
-      "default_attributes": [],
-      "variations": [],
-      "grouped_products": [],
-      "menu_order": 4,
-      "price_html": "<span class=\"woocommerce-Price-amount amount\"><bdi><span class=\"woocommerce-Price-currencySymbol\">&#82;&#36;</span>179,00</bdi></span>",
-      "related_ids": [],
-      "meta_data": [
-        {
-          "id": 50180,
-          "key": "_wc_facebook_sync_enabled",
-          "value": "yes"
-        },
-        {
-          "id": 50181,
-          "key": "fb_visibility",
-          "value": "yes"
-        },
-        {
-          "id": 50182,
-          "key": "fb_product_description",
-          "value": ""
-        },
-        {
-          "id": 50183,
-          "key": "_wc_facebook_product_image_source",
-          "value": "parent_product"
-        },
-        {
-          "id": 50184,
-          "key": "fb_product_image",
-          "value": ""
-        },
-        {
-          "id": 50185,
-          "key": "fb_product_price",
-          "value": ""
-        }
-      ],
-      "stock_status": "instock",
-      "has_options": false,
-      "_links": {
-        "self": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/4003"
-          }
-        ],
-        "collection": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products"
-          }
-        ],
-        "up": [
-          {
-            "href": "https://anaramosmoda.com.br/wp-json/wc/v3/products/3999"
-          }
-        ]
-      }
-    },
-    {
-      "code": "woocommerce_rest_product_invalid_id",
-      "message": "ID inv\u00e1lido.",
-      "data": {
-        "status": 404
       }
     }
   ]
