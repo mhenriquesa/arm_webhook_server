@@ -1,3 +1,6 @@
+2.2.1
+- Correção de BUG ao receber webhook do site e criar cartões e etiquetas
+
 2.2.0
 - Implementado página para criar links de formulários de pedidos. 
 - Os links enviados conterão informações sobre o pedido da cliente

@@ -142,10 +142,11 @@ class OrderSite(Order):
         shipping_price = order_data['shipping_lines'][0]['total']
         products_info = order_data['line_items']
         total_value = order_data['total']
+        forma_pgto = order_data['payment_method_title']
         trello_list = '63191b83a8e4af048326a8b2'
 
-        super().__init__(id, client_first_name, client_last_name, cpf,
-                         client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, trello_list)
+        super().__init__(client_first_name, client_last_name, cpf,
+                         client_address_1, number, complement, neighbor, city, state, cep, phone, shipping_type, shipping_price, products_info, total_value, forma_pgto, trello_list)
 
         self.id = order_data['id']
 
