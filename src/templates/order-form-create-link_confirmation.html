@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static' , filename='css/styles.css')}}" />
+    <title>Criação de Links - Ana Ramos Moda</title>
+  </head>
+  <body>
+    <!-- multistep form -->
+    <form id="msform" action="{{ url_for('main.address_form') }}" method="POST">
+      <fieldset>
+        <h2 class="fs-title">Link criado</h2>
+        <h3 class="fs-subtitle">Copie o link abaixo</h3>
+        <a href="{{ link_form }}">{{ link_form }}</a>
+      </fieldset>
+    </form>
+  </body>
+</html>

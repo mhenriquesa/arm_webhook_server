@@ -9,8 +9,8 @@ teste.py
 __pycache__
 credentials.json
 token.json
-run_develop.py
 new_order.json
 src/info.txt
 testes-implementation.txt
 assets/node_modules
+run_develop.py

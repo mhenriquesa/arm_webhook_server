@@ -16,9 +16,18 @@ def order_form_page():
     return views_controller.order_form()
 
 
-@main.route('/criar-link-formulario', methods=['GET'])
+@main.route('/criar-link-formulario', methods=['GET', 'POST'])
 def create_form_link():
-    return views_controller.order_form()
+    if request.method == 'GET':
+        return views_controller.criar_link_form()
+
+    data = {
+        "cod_produtos": request.form.get('cod_produtos'),
+        "preco_frete": request.form.get('preco_frete'),
+        "tipo_frete": request.form.get('tipo_frete'),
+        "forma_pgto": request.form.get('forma_pgto'),
+    }
+    return orders_controller.criar_link_form(data)
 
 
 @main.route('/address-form', methods=['POST'])

@@ -18,7 +18,13 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '..', 'src', 'templates', 'home.html'),
+      template: path.resolve(
+        __dirname,
+        '..',
+        'src',
+        'templates',
+        'order-form-create-link.html'
+      ),
     }),
   ],
   module: {

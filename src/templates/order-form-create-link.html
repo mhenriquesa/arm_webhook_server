@@ -9,172 +9,46 @@
   </head>
   <body>
     <!-- multistep form -->
-    <form id="msform" action="{{ url_for('main.address_form') }}" method="POST">
+    <form id="msform" action="{{ url_for('main.create_form_link') }}" method="POST">
       <fieldset>
-        <h2 class="fs-title">Endereço de entrega</h2>
+        <h2 class="fs-title">Criação de Links de Formulários</h2>
         <h3 class="fs-subtitle">
-          Por favor, preecha o endereço onde deseja receber seus produtos.
+          Preencha as Informações sobre o pedido para criar um link e enviar para a
+          cliente
         </h3>
+        <label for="cod_produtos">Digite os códigos dos produtos</label>
         <input
-          placeholder="Primeiro Nome"
-          name="name_1"
+          placeholder="Ex: 3282 ou 4001,3226"
+          name="cod_produtos"
           type="text"
           pattern="([aA-zZáéíóúÁÉÍÓÚ 0-9]+)"
-          title="Apenas letras. Até 20 letras"
-          maxlength="20"
-          required
+          title="Para mais produtos separe por virgulas sem espaço"
         />
+        <label for="preco_frete">Qual o valor do frete?</label>
         <input
-          placeholder="Sobrenome"
-          name="name_2"
-          type="text"
-          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
-          title="Apenas letras. Até 20 letras"
-          maxlength="20"
-          required
-        />
-        <input
-          type="number"
-          name="cep"
-          placeholder="CEP"
-          title="Apenas números. Inclua os zeros. Ex: 09172180"
-          maxlength="8"
-          minlength="8"
-          id="cep"
-          required
-        />
-        <input
-          placeholder="Logradouro"
-          name="address_1"
-          type="text"
-          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
-          title="Apenas letras. Até 40 letras"
-          maxlength="40"
-          id="address_1"
-          required
-        />
-
-        <input
-          placeholder="Número"
-          name="address_number"
-          type="text"
-          title="Apenas letras e números. Até 12 dígitos"
-          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
-          maxlength="12"
-          required
-        />
-        <input
-          placeholder="Bairro"
-          name="bairro"
-          type="text"
-          title="Até 24 caracteres"
-          maxlength="24"
-          required
-          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
-          id="bairro"
-        />
-
-        <input
-          placeholder="Cidade"
-          name="cidade"
-          type="text"
-          title="Até 40 caracteres"
-          maxlength="40"
-          required
-          id="cidade"
-          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
-        />
-        <input
-          placeholder="Bloco / Ap / Casa"
-          name="complemento"
-          type="text"
-          title="Até 24 caracteres"
-          maxlength="24"
-          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
-        />
-        <input
-          placeholder="Informações adicionais"
-          name="obs"
-          type="text"
-          title="Até 30 caracteres"
-          maxlength="30"
-          pattern="([aA-zZáéíóúÁÉÍÓÚãÃõÕ 0-9]+)"
-        />
-        <select name="estado" id="estado" required>
-          <option value="AC">AC</option>
-          <option value="AL">AL</option>
-          <option value="AP">AP</option>
-          <option value="AM">AM</option>
-          <option value="BA">BA</option>
-          <option value="CE">CE</option>
-          <option value="DF">DF</option>
-          <option value="ES">ES</option>
-          <option value="GO">GO</option>
-          <option value="MA">MA</option>
-          <option value="MT">MT</option>
-          <option value="MS">MS</option>
-          <option value="MG">MG</option>
-          <option value="PA">PA</option>
-          <option value="PB">PB</option>
-          <option value="PR">PR</option>
-          <option value="PE">PE</option>
-          <option value="PI">PI</option>
-          <option value="RJ">RJ</option>
-          <option value="RN">RN</option>
-          <option value="RS">RS</option>
-          <option value="RO">RO</option>
-          <option value="RR">RR</option>
-          <option value="SC">SC</option>
-          <option value="SP">SP</option>
-          <option value="SE">SE</option>
-          <option value="TO">TO</option>
-        </select>
-        <input
-          placeholder="CPF para os Correios"
-          name="cpf"
-          type="text"
-          pattern="(\d{3}\.?\d{3}\.?\d{3}-?\d{2})|(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})"
-          title="Apenas Números. 11 Dígitos. Inclua os zeros. Ex: 00652158925"
-          maxlength="11"
-          minlength="11"
-          required
-        />
-        <input
-          placeholder="WhatsApp (DDD + Telefone)"
-          type="number"
-          name="zap"
-          title="Apenas números. Ex: 11982942057"
-          maxlength="11"
-          minlength="10"
-          required
-        />
-
-        <input
-          placeholder="Email (Código de rastreamento)"
-          name="email"
-          type="email"
-          title="Formato com @ .com .com.br"
-        />
-        <input placeholder="Produtos" name="produtos" type="hidden" id="produtos" />
-        <input placeholder="Tipo frete" name="tipo_frete" type="hidden" id="tipo_frete" />
-        <input placeholder="Forma pgto" name="forma_pgto" type="hidden" id="forma_pgto" />
-        <input
-          placeholder="Preco frete"
+          placeholder="Sem centavos: Ex 25 ou 15 ou 0"
           name="preco_frete"
-          type="hidden"
-          id="preco_frete"
+          type="number"
+          title="Somente 2 dígitos"
+          pattern="([0-9][0-9]])"
         />
+
+        <label for="tipo_frete">PAC ou SEDEX?</label>
+        <select name="tipo_frete" id="">
+          <option value="PAC">PAC</option>
+          <option value="SEDEX">SEDEX</option>
+        </select>
+
+        <label for="forma_pgto">PIX ou Link MP?</label>
+        <select name="forma_pgto" id="">
+          <option value="PIX">PIX</option>
+          <option value="Link MP">Link MP</option>
+        </select>
         <input type="submit" name="enviar" class="submit action-button" value="Enviar" />
         <h3 class="fs-subtitle">
           Após enviar, por favor aguarde alguns segundo para receber a confirmação
         </h3>
       </fieldset>
     </form>
-    <script
-      src="https://code.jquery.com/jquery-3.6.3.min.js"
-      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-      crossorigin="anonymous"
-    ></script>
-    <script src="{{ url_for('static' , filename='js/form_autocomplete.js')}}"></script>
   </body>
 </html>

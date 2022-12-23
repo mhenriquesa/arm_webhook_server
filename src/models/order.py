@@ -1,6 +1,6 @@
 from src.models.melhor_envio import ShippingTag
+from src.models.woo_api import getProductInfo
 from src.models.trello import TrelloCard
-from src.woo_api import getProductInfo
 from datetime import datetime
 import json
 import re
@@ -99,6 +99,10 @@ class OrderAddressForm(Order):
 
         for code in codes_int_list:
             prodinfo = getProductInfo(code)
+
+            if prodinfo == None:
+                return None
+
             imgs_src = prodinfo['images'][0]['src']
             product_name = prodinfo['name']
             product_price = prodinfo['price']
@@ -175,3 +179,26 @@ class OrderSite(Order):
         TrelloCard.set_attachs(
             card_info['id'], self.products_details['imgs_urls_list'])
         return
+
+
+class AdressFormLink():
+    def __init__(self, link_data):
+        self.cod_produtos = link_data['cod_produtos']
+        self.preco_frete = link_data['preco_frete']
+        self.tipo_frete = link_data['tipo_frete']
+        self.forma_pgto = link_data['forma_pgto']
+        self.link = None
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__, indent=3)
+
+    def create(self):
+        link = 'https://anaramosmoda.com/formulario-de-pedido?'
+
+        if self.cod_produtos:
+            link = f"{link}produtos={self.cod_produtos}&"
+
+        if self.preco_frete:
+            link = f"{link}preco_frete={self.preco_frete}&"
+
+        self.link = link
